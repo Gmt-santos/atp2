@@ -1,0 +1,20 @@
+{
+    "configurations": [
+        {
+            "name": "Win32",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "C:\\MinGW\\include",
+                "C:\\MinGW\\lib\\gcc\\mingw32\\*\\include",
+                "C:\\MinGW\\lib\\gcc\\mingw32\\*\\include-fixed"
+            ],
+            "defines": [
+                "_DEBUG",
+                "UNICODE",
+                "_UNICODE"
+            ],
+            "compilerPath": "C:\\MinGW\\bin\\gcc.exe"
+        }
+    ],
+    "version": 4
+}

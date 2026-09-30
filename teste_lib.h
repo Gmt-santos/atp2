@@ -1,0 +1,1 @@
+void printar_matriz_inteiros(int*,int);
