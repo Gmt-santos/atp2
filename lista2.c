@@ -108,69 +108,279 @@
 
 // ao final da chamada, ∗a ≤ ∗b ≤ ∗c. Escreva também a função principal que leia os três
 // valores, chame ordena3 e imprima o resultado.
-#include <stdio.h>
-void ordena3(int *a, int *b, int *c);
-int main(){
-    int a,b,c;
-    printf("Digite 'a':\n");
-    scanf("%d",&a);
-    printf("\nDigite 'b':\n");
-    scanf("%d",&b);
-    printf("\nDigite 'c':\n");
-    scanf("%d",&c);
-    printf("\nValores antes:\na=%d,b=%d,c=%d",a,b,c);
-    ordena3(&a,&b,&c);
-    printf("\nValores depois:\na=%d,b=%d,c=%d",a,b,c);
+// #include <stdio.h>
+// void ordena3(int *a, int *b, int *c);
+// int main(){
+//     int a,b,c;
+//     printf("Digite 'a':\n");
+//     scanf("%d",&a);
+//     printf("\nDigite 'b':\n");
+//     scanf("%d",&b);
+//     printf("\nDigite 'c':\n");
+//     scanf("%d",&c);
+//     printf("\nValores antes:\na=%d,b=%d,c=%d",a,b,c);
+//     ordena3(&a,&b,&c);
+//     printf("\nValores depois:\na=%d,b=%d,c=%d",a,b,c);
 
    
-    return 0;
-}
-void ordena3(int *a, int *b, int *c){
-    int temp1,temp2;
-    if(*a == *b && *b == *c){
-        return;
+//     return 0;
+// }
+// void ordena3(int *a, int *b, int *c){
+//     int temp1,temp2;
+//     if(*a == *b && *b == *c){
+//         return;
 
-    }
-    if(*a >=*b ){
-        if(*c>=*b){
-            if(*c>=*a){
-                temp1=*a;
-                *a=*b;
-                *b=temp1;
-                return;
-                //b a c
-            }else{
-                temp1=*a;
-                *a=*b;
-                *b=*c;
-                *c=temp1;
-                return;
-                // b c a
-            }
-        }else{
-            temp1=*c;
-            *c=*a;
-            *a=temp1;
-            return;
-            // c b a
-        }
-    }else if(*a>=*c){
-            temp1=*a;
-            *a=*c;
-            *c=*b;
-            *b=temp1;
-            return;
-            // c a b
-    }else if(*c>=*b){
-        return;
-        // a b c
-    }else{
-        temp1=*b;
-        *b=*c;
-        *c=temp1;
-        return;
-        // a c b 
-    }
+//     }
+//     if(*a >=*b ){
+//         if(*c>=*b){
+//             if(*c>=*a){
+//                 temp1=*a;
+//                 *a=*b;
+//                 *b=temp1;
+//                 return;
+//                 //b a c
+//             }else{
+//                 temp1=*a;
+//                 *a=*b;
+//                 *b=*c;
+//                 *c=temp1;
+//                 return;
+//                 // b c a
+//             }
+//         }else{
+//             temp1=*c;
+//             *c=*a;
+//             *a=temp1;
+//             return;
+//             // c b a
+//         }
+//     }else if(*a>=*c){
+//             temp1=*a;
+//             *a=*c;
+//             *c=*b;
+//             *b=temp1;
+//             return;
+//             // c a b
+//     }else if(*c>=*b){
+//         return;
+//         // a b c
+//     }else{
+//         temp1=*b;
+//         *b=*c;
+//         *c=temp1;
+//         return;
+//         // a c b 
+//     }
 
-}
+// }
 
+
+//Crie um programa que receba um número inteiro N e que aloque memória dinamicamente
+
+// para um vetor de números inteiros. A seguir, imprima na saída padrão da aplicação o en-
+// dereço de memória de cada elemento do vetor. Além disso, supondo que saiba o tamanho
+
+// em bytes de um número inteiro por meio de sizeof(int) qual padrão pode ser notado nos
+// endereços de memória impressos?
+// #include <stdio.h>
+// #include <stdlib.h>
+// int main(){
+//     int *ptr;
+//     int N;
+//     printf("Digite um numero:\n");
+//     scanf("%d",&N);
+//     ptr=(int *)malloc(sizeof(int)*N);
+//     for(int i=0;i<N;i++){
+//         printf("\nEndereco numero %d:%p",i,&ptr[i]);
+//     }
+//     return 0;
+// }    
+
+// Crie um programa que receba um número inteiro N e que aloque memória dinamica-
+// mente para dois vetores u e v de tamanho N com seus elementos preenchidos pelo usuário
+
+// por meio da entrada padrão. A seguir, realize os seguintes itens:
+// a) Imprima o resultado da soma desses vetores: ⃗u +⃗v.
+// b) Imprima o resultado da subtração desses vetores: ⃗u −⃗v.
+// c) Imprima o resultado do produto interno/ponto desses vetores: ⃗u ·⃗v.
+// d) Imprima o ângulo θ = ang(⃗u,⃗v) entre esses vetores, em que
+
+// θ = arccos 
+//  u ·v
+// ∥⃗u∥∥⃗v∥
+
+// , θ ∈ [0, π]
+// #include <stdio.h>
+// #include <stdlib.h>
+// #include <math.h>
+// void a(float *,float*,int);
+// void b(float *,float*,int);
+// float c(float *,float*,int);
+// void d(float *,float*,int);
+// float calcula_norma(float*,int);
+// int main(){
+//     float *u,*v;
+//     int N;
+//     printf("Digite as dimensoes dos vetores:\n");
+//     scanf("%d",&N);
+//     u=malloc(sizeof(float)*N);
+//     v=malloc(sizeof(float)*N);
+//     for(int i=0;i<N;i++){
+//         printf("Digite a %d dimensao de u:\n",i+1);
+//         scanf("%f",&u[i]);
+//         printf("Digite a %d dimensao de v:\n",i+1);
+//         scanf("%f",&v[i]);
+//     }
+//     a(u,v,N);
+//     b(u,v,N);
+//     printf("\nO produto interno de u e v eh de %.2f:\n",c(u,v,N));
+//     d(u,v,N);
+//     return 0;
+// }
+// void a(float *u,float* v,int N){
+//     int i;
+//     for(i=0;i<N;i++){
+//         printf("\nDimensao %d de u+v: %.2f",i+1,u[i]+v[i]);
+//     }
+    
+// }
+// void b(float *u,float* v,int N){
+//     int i;
+//     for(i=0;i<N;i++){
+//         printf("\nDimensao %d de u-v: %.2f",i+1,u[i]-v[i]);
+//     }
+    
+// }
+// float c(float *u,float* v,int N){
+//     int i;
+//     float soma=0;
+//     for(i=0;i<N;i++){
+
+//         soma+=u[i]*v[i];
+
+//     }
+  
+//     return soma;
+// }
+// void d(float * u,float* v,int N){
+//     float norma_u,norma_v,produto_u_v;
+//     norma_u=calcula_norma(u,N);
+//     norma_v=calcula_norma(v,N);
+//     produto_u_v=c(u,v,N);
+//     printf("\nO angulo de u e v eh de :%.2f",acos(produto_u_v/(norma_u*norma_v)));
+
+// }
+// float calcula_norma(float* vec,int N){
+//     int i;
+//     float soma=0;
+//     for(i=0;i<N;i++){
+//         soma+=pow(vec[i],2);
+
+//     }
+//     return sqrt(soma);
+// }
+
+//Crie um programa que receba dois números inteiros m e n, que receba as entradas de uma
+// matriz A de tamanho m × n, e que imprima na saída padrão da aplicação essa matriz.
+// Entretanto, nesse exercício você está encarregado de implementar essa matriz como um
+// vetor simples alocado dinamicamente (e não como um vetor de vetores).
+// #include <stdio.h>
+// #include <stdlib.h>
+// int main(){
+//     // m = linhas
+//     // n = colunas
+//     int m,n,i,j;
+//     int *matriz;
+//     printf("Digite o numero de linhas da matriz:\n");
+//     scanf("%d",&m);
+//     printf("Digite o numero de colunas da matriz:\n");
+//     scanf("%d",&n);
+//     matriz=malloc(sizeof(int)*m*n);
+//     for(i=0;i<m;i++){
+//         for(j=0;j<n;j++){
+//             printf("Digite o valor da posicao (%d,%d):\n",i,j);
+//             scanf("%d",&matriz[(n*i)+j]);
+//         }
+//     }
+//     printf("Printando a matriz:\n");
+//     for(i=0;i<m;i++){
+//         for(j=0;j<n;j++){
+//             printf("%d\t",matriz[(n*i)+j]);
+//         }
+//         printf("\n");
+//     }
+//     free(matriz);
+//     return 0;
+// }
+
+// Crie uma função que receba uma matriz A ∈ Rm×n
+// e dois números inteiros m e n, e que
+// transponha a matriz A, retornando a matriz A
+// T alocada dinamicamente.
+// #include <stdio.h>
+// #include <stdlib.h>
+// int **transpondo(int **,int,int);
+// int main(){
+//     int **matriz,**matriz_trans;
+//     int m,n,i,j;
+//     printf("Digite o numero de linhas da matriz:\n");
+//     scanf("%d",&m);
+
+//     printf("Digite o numero de colunas da matriz:\n");
+//     scanf("%d",&n);
+
+//     matriz=(int **)malloc(sizeof(int *)*m);
+
+//     for( i=0;i<m;i++){
+//         matriz[i]=malloc(sizeof(int)*n);
+//     }
+
+//     for(i=0;i<m;i++){
+
+//         for(j=0;j<n;j++){
+//             printf("Digite o valor de (%d,%d) da matriz: ",i,j);
+//             scanf("%d",&matriz[i][j]);
+//         }
+
+//     }
+
+//     matriz_trans=transpondo(matriz,m,n);
+
+//     printf("Matriz normal:\n");
+//     for(i=0;i<m;i++){
+
+//         for(j=0;j<n;j++){
+           
+//             printf("%d\t",matriz[i][j]);
+//         }
+//         free(matriz[i]);
+//         printf("\n");
+
+//     }
+//     printf("Matriz transposta:\n");
+//     for(i=0;i<n;i++){
+//         for(j=0;j<m;j++){
+
+//            printf("%d\t",matriz_trans[i][j]);
+//         }
+//         free(matriz_trans[i]);
+//         printf("\n");
+//     }
+//     free(matriz);
+//     free(matriz_trans);
+//     return 0;
+// }
+// int **transpondo(int ** matriz,int m,int n){
+//     int i,j;
+//     int **matriz_trans=(int **)malloc(sizeof(int *)*n);
+//     for(i=0;i<n;i++){
+//         matriz_trans[i]=malloc(sizeof(int)*m);
+//     }
+//     for(i=0;i<n;i++){
+//         for(j=0;j<m;j++){
+//             matriz_trans[i][j]=matriz[j][i];
+//         }
+       
+//     }
+//     return matriz_trans;
+// }
