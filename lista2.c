@@ -1,6 +1,27 @@
 // Crie uma função com o seguinte protótipo void split(long int x, int *l, int *h), a
 // qual recebe um número inteiro longo x e coloca nas variáveis l e h seus 32 bits menos e
-// mais significativos, respectivamente.
+// // mais significativos, respectivamente.
+// #include <stdio.h>
+// #include <stdlib.h>
+// // long long int tem 8 bytes,long int só 4 bytes. Portanto,não faz sentido pensar em 4 bytes nesse exercicio,pois
+// // o long int só tem 32 bits,já o long long tem 64 bits
+// void split(long long int x,int *l,int *h){
+//     int * ptr_temp=(int *)&x;
+//     *l=ptr_temp[0];
+//     *h=ptr_temp[1];
+//     return;
+// }
+// int main(){
+//     int l,h;
+//     int i;
+//     long long int x=100000;
+//     split(x,&l,&h);
+    
+//     printf("Valor de h:\n%d\n",h);
+//     printf("Valor de l:\n%d\n",l);
+//     return 0;
+// }
+
 
 //Crie uma função que receba um vetor com n números reais e que “retorne” à função chamadora
 //o maior e o menor número do vetor, simultaneamente.
@@ -384,3 +405,364 @@
 //     }
 //     return matriz_trans;
 // }
+// Crie uma função com o protótipo int *concatena(const int *a, int na, const int
+// *b, int nb), a qual retorna um novo vetor alocado dinamicamente de tamanho na + nb,
+// contendo os elementos de a seguidos dos elementos de b. Caso a alocação falhe, a função
+// deve retornar NULL. No programa principal, os vetores a e b também devem ser alocados
+// dinamicamente, e toda a memória deve ser liberada ao final.
+
+// #include <stdio.h>
+// #include <stdlib.h>
+// int ** mult_matriz(int**,int**,int,int,int);
+// void free_matrizes(int **,int **,int **,int,int);
+// int main(){
+//     int m,n,p,i,j;
+//     int **A,**B,**C;
+
+//     printf("Digite o valor de M:\n");
+//     scanf("%d",&m);
+//     printf("Digite o valor de N:\n");
+//     scanf("%d",&n);
+//     printf("Digite o valor de P:\n");
+//     scanf("%d",&p);
+//     if(n<=0 || m<=0 || p<=0){
+//         printf("Dados invalidos de matriz!\nPrograma encerrando...");
+//         return 0;
+//     }
+//     // A=mxn e B=nxp
+//     A=(int**)malloc(sizeof(int*)*m);
+//     B=(int**)malloc(sizeof(int*)*n);
+//     for(i=0;i<m;i++){
+//         A[i]=(int*)malloc(sizeof(int)*n);
+//     }
+//     for(i=0;i<n;i++){
+//         B[i]=(int *)malloc(sizeof(int)*p);
+//     }
+
+//     printf("Preenchendo os vetores:\nA\n");
+//     for(i=0;i<m;i++){
+//         for(j=0;j<n;j++){
+//             printf("Posicao (%d,%d) de A:\n",i,j);
+//             scanf("%d",&A[i][j]);
+            
+//         }
+//     }
+//     printf("Preenchendo os vetores:\nB\n");
+//     for(i=0;i<n;i++){
+//         for(j=0;j<p;j++){
+//             printf("Posicao (%d,%d) de B:\n",i,j);
+//             scanf("%d",&B[i][j]);
+            
+//         }
+//     }
+//     C=mult_matriz(A,B,m,n,p);
+//     printf("Printando o vetor C:\n");
+//     for(i=0;i<m;i++){
+//         for(j=0;j<p;j++){
+//             printf("%d\t",C[i][j]);
+//         }
+//         printf("\n");
+//     }
+//     free_matrizes(A,B,C,m,n);
+//     return 0;
+// }
+// int ** mult_matriz(int** A,int** B,int m,int n ,int p){
+//     int ** C=(int **)malloc(sizeof(int*)*m);
+//     int i,j,k;
+//     for(i=0;i<m;i++){
+//         C[i]=calloc(p,sizeof(int));
+//     }
+//     for(i=0;i<m;i++){
+//         for(j=0;j<p;j++){
+//             for(k=0;k<n;k++){
+//                 C[i][j]+=A[i][k]*B[k][j];
+//             }
+//         }
+//     }
+//     return C;
+// }
+
+// void free_matrizes(int ** A,int **B,int **C,int m,int n){
+//     int i;
+//     for(i=0;i<m;i++){
+//         free(A[i]);
+//     }
+//     for(i=0;i<n;i++){
+//         free(B[i]);
+
+//     }
+//     for(i=0;i<m;i++){
+//         free(C[i]);
+//     }
+//     free(C);
+//     free(A);
+//     free(B);
+//     return;
+// }
+
+
+// Crie uma função com o protótipo int *concatena(const int *a, int na, const int
+// *b, int nb), a qual retorna um novo vetor alocado dinamicamente de tamanho na + nb,
+// contendo os elementos de a seguidos dos elementos de b. Caso a alocação falhe, a função
+// deve retornar NULL. No programa principal, os vetores a e b também devem ser alocados
+// dinamicamente, e toda a memória deve ser liberada ao final.
+// #include <stdio.h>
+// #include <stdlib.h>
+// int *concatena(const int *a, int na, const int *b, int nb);
+// int main(){
+//     int *a,*b,*c;
+//     int na,nb,i;
+//     printf("Digite o tamanho de A:\n");
+//     scanf("%d",&na);
+//     printf("Digite o tamanho de B:\n");
+//     scanf("%d",&nb);
+//     a=(int *)malloc(sizeof(int)*na);
+//     b=(int *)malloc(sizeof(int)*nb);
+//     if(a==NULL && b!=NULL){
+//         free(b);
+//         printf("Erro de alocacao!");
+//         return 0;
+//     }else if(a!=NULL && b == NULL){
+//         free(a);
+//         printf("Erro de alocacao!");
+//         return 0;
+//     }else if(a==NULL && b==NULL){
+//         printf("Erro de alocacao!");
+//         return 0;
+//     }
+//     printf("\nPreenchendo A:\n");
+//     for(i=0;i<na;i++){
+//         printf("Digite o valor %d de A:\n",i);
+//         scanf("%d",&a[i]);
+//     }
+//     printf("\nPreenchendo B:\n");
+//     for(i=0;i<nb;i++){
+//         printf("Digite o valor %d de B\n",i);
+//         scanf("%d",&b[i]);
+    
+//     }
+//     c=concatena(a,na,b,nb);
+//     if(c == NULL){
+//         free(a);
+//         free(b);
+//         printf("Erro de alocacao!");
+//         return 0;
+//     }
+//     printf("\nA:");
+//     for(i=0;i<na;i++){
+//         printf("%d\t",a[i]);
+//     }
+//     printf("\nB:");
+//     for(i=0;i<nb;i++){
+//         printf("%d\t",b[i]);
+    
+//     }
+//     printf("\nC:");
+//     for(i=0;i<na+nb;i++){
+//         printf("%d\t",c[i]);
+//     }
+//     free(a);
+//     free(b);
+//     free(c);
+//     return 0;
+
+// }
+// int *concatena(const int *a, int na, const int *b, int nb){
+//     int *c;
+//     int i;
+//     c=(int *)malloc(sizeof(int)*(na+nb));
+//     if(c == NULL){
+//         return NULL;
+//     }
+//     for(i=0;i<na;i++){
+//         c[i]=a[i];
+//     }
+//     for(i=0;i<nb;i++){
+//         c[i+na]=b[i];
+//     }
+//     return c;
+// }
+
+// Crie uma função com o protótipo char *duplica(const char *s), a qual aloca dinami-
+// camente a quantidade exata de memória necessária e retorna uma cópia da cadeia de
+
+// caracteres s (não utilize strdup). No programa principal, leia uma palavra, duplique-a,
+// altere o primeiro caractere da cópia para ’X’ e imprima a original e a cópia, mostrando
+// que ocupam regiões de memória distintas. Libere a memória ao final.
+// // Dica: Lembre-se de reservar espaço para o caractere terminador ’\0’.
+// #include <stdio.h>
+// #include <stdlib.h>
+// char *duplica(const char *s);
+// int main(){
+//     char s[256];
+//     char *copia;
+//     printf("Digite uma palavra:\n");
+//     scanf(" %s",s);
+//     copia=duplica(s);
+    
+//     if(copia ==  NULL){
+//         printf("Erro de alocacao!");
+//         return 0;
+//     }
+//     copia[0]='X';
+//     printf("Original:%s\nCopia:%s",s,copia);
+//     free(copia);
+//     return 0;
+// }
+// char *duplica(const char *s){
+//     int i=0;
+//     char *copia;
+//     while(s[i]!='\0'){
+//         i++;
+//     }
+//     if(i==0){
+//         return NULL;
+//     }
+//     copia=malloc(i+1);
+//     if(copia == NULL){
+//         return NULL;
+//     }
+//     for(i=0;s[i]!='\0';i++){
+//         copia[i]=s[i];
+//     }
+//     copia[i]='\0';
+//     return copia;
+
+
+// }
+
+//Crie as funções int **aloca_matriz(int m, int n) e void libera_matriz(int **M,
+
+// int m), as quais alocam e liberam, respectivamente, uma matriz de inteiros m × n repre-
+// sentada como um vetor de ponteiros. Escreva um programa que leia m, n e os elementos
+
+// da matriz, e imprima na saída padrão da aplicação a soma de cada linha.
+// #include <stdio.h>
+// #include <stdlib.h>
+// int ** aloca_matriz(int m,int n);
+// void libera_matriz(int **M,int m);
+// int main(){
+//     int m,n;
+//     int i,j;
+//     int **M;
+//     int *soma_linhas;
+//     printf("Digite o numero de linhas da matriz:\n");
+//     scanf("%d",&m);
+//     printf("Digite o numero de colunas da matriz:\n");
+//     scanf("%d",&n);
+//     M=aloca_matriz(m,n);
+//     if(M == NULL){
+//         printf("Erro de alocacao!");
+//         return 0;
+
+//     }
+//     soma_linhas=calloc(m,sizeof(int));
+//     if(soma_linhas==NULL){
+//         free(M);
+//         printf("Erro de alocacao!");
+//         return 0;
+//     }
+//     for(i=0;i<m;i++){
+//         for(j=0;j<n;j++){
+//             printf("Digite o numero de coordenada (%d,%d):\n",i,j);
+//             scanf("%d",&M[i][j]);
+//             soma_linhas[i]+=M[i][j];
+//         }
+//     } 
+//     for(i=0;i<m;i++){
+//         printf("\nSoma da %d linha: %d",i,soma_linhas[i]);
+//     }
+//     libera_matriz(M,m);
+//     free(soma_linhas);
+// }
+
+// int ** aloca_matriz(int m,int n){
+//     int **M;
+//     int i;
+//     M=malloc(sizeof(int*)*m);
+//     if( M == NULL){
+//         return NULL;
+//     }
+//     for(i=0;i<m;i++){
+//         M[i]=malloc(sizeof(int)*n);
+//         if(M[i] == NULL){
+//             return NULL;
+
+//         }
+
+//     }
+//     return M;
+    
+// }
+// void libera_matriz(int **M,int m){
+//     for(int i=0;i<m;i++){
+//         free(M[i]);
+
+//     }
+//     free(M);
+// }
+
+
+// Crie uma função com o protótipo int *filtra_pares(const int *v, int n, int *tam),
+// a qual retorna um novo vetor alocado dinamicamente contendo apenas os elementos
+// pares de v, na mesma ordem em que aparecem. O vetor retornado deve ter exatamente o
+// tamanho necessário, e esse tamanho deve ser devolvido por meio do ponteiro tam. Caso
+// não existam elementos pares, a função deve retornar NULL e *tam deve valer 0.
+#include <stdio.h>
+#include <stdlib.h>
+int *filtra_pares(const int *v, int n, int *tam);
+int main(){
+    int tam;
+    int n,*v,*pares;
+    printf("Digite o tamanho do vetor desejado:\n");
+    scanf("%d",&n);
+    v=malloc(sizeof(int)*n);
+    if(v == NULL){
+        printf("Erro de alocacao!");
+        return 0;
+    }
+    for(int i=0;i<n;i++){
+        printf("Digite a posicao %d:\n",i);
+        scanf("%d",&v[i]);
+
+    }
+    pares=filtra_pares(v,n,&tam);
+    if(pares == NULL){
+        free(v);
+        printf("Erro de alocacao ou nao ha pares!");
+        return 0;
+    }
+    printf("Pares(%d)\n",tam);
+    for(int i=0;i<tam;i++){
+        printf("%d\t",pares[i]);
+    }
+    free(v);
+    free(pares);
+    return 0;
+}
+int *filtra_pares(const int *v, int n, int *tam){
+    int *pares;
+    *tam=0;
+    int index=0;
+    for(int i=0;i<n;i++){
+        if(v[i]%2 ==0){
+            *tam+=1;
+        }
+   
+    }
+    if(*tam ==  0){
+        return NULL;
+    }
+    pares=malloc(sizeof(int)*(*tam));
+    if(pares ==  NULL){
+        return NULL;
+    }
+    for(int i=0;i<n;i++){
+        if(v[i]%2 ==0){
+            pares[index]=v[i];
+            index++;
+        }
+   
+    }
+    return pares;
+}
