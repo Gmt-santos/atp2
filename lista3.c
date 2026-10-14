@@ -361,48 +361,176 @@
 
 
 // Atenção: O código fornece uma solução boa mas nao perfeita,há casos q ela nn funciona,trabalhar nela dps!!!
+// #include <stdio.h>
+// #include <stdlib.h>
+// int calcula_size_substring(int head,int *numbers,int numbers_size,int init,int actual);
+// int main(){
+//     int *numbers,numbers_size,i;
+//     printf("Digite o tamanho do vetor:\n");
+//     scanf("%d",&numbers_size);
+//     numbers=malloc(sizeof(int)*numbers_size);
+//     for(i=0;i<numbers_size;i++){
+//         printf("Digite o numero %d do vetor:\n",i);
+//         scanf("%d",&numbers[i]);
+//     }
+//     printf("A maior sequencia crescente eh de:%d",calcula_size_substring(1,numbers,numbers_size,0,0));
+//     free(numbers);
+//     return 0;
+// }
+// int calcula_size_substring(int head,int *numbers,int numbers_size,int init,int actual_ptr){
+//     if(head == 1){
+//         int i,biggest=-1,actual_size_substring;
+//         for(i=0;i<numbers_size;i++){
+//             actual_size_substring=calcula_size_substring(0,numbers,numbers_size,i,i);
+           
+//             if(actual_size_substring>biggest){
+                
+//                 biggest=actual_size_substring;
+//             }
+//         }
+//         return biggest;
+//     }else{
+        
+//         if(init==numbers_size){
+//             return 1;
+//         }else if(numbers[init]>numbers[actual_ptr]){
+            
+//             actual_ptr=init;
+//             init++;
+           
+//             return 1+calcula_size_substring(0,numbers,numbers_size,init,actual_ptr);
+//         }else{
+           
+//             init++;
+//             return calcula_size_substring(0,numbers,numbers_size,init,actual_ptr);
+//         }
+//     }
+// }
+
+// Implemente uma função recursiva int soma_digitos(int n) que receba um número in-
+// teiro não negativo n e retorne a soma de seus dígitos. Não utilize laços de repetição.
+// #include <stdio.h>
+// int soma_digitos(int n);
+// int main(){
+//     int n;
+//     printf("Digite um numero:\n");
+//     scanf("%d",&n);
+//     printf("A soma dos digitos eh de %d",soma_digitos(n));
+//     return 0;
+// }
+// int soma_digitos(int n){
+//     if(n == 0){
+//         return 0;
+//     }else{
+//         return n%10+soma_digitos(n/10);
+//     }
+    
+
+// Implemente uma função recursiva int potencia(int b, int e) que calcule b
+// e, com e ≥
+// 0, utilizando a estratégia de exponenciação rápida:
+// }
+// #include <stdio.h>
+// int potencia(int b, int e);
+// int main(){
+//     int b,e;
+//     printf("Digite a base:\n");
+//     scanf("%d",&b);
+//     printf("Digite agora o expoente:\n");
+//     scanf("%d",&e);
+//     if(e ==0 && b ==0){
+//         printf("Essa potencia eh indeterminada ou,por convencao,vale 1");
+//         return 0;
+//     }
+//     printf("A potencia de %d elevado a %d eh de %d",b,e,potencia(b,e));
+//     return 0;
+// }
+// int potencia(int b,int e){
+//     if(e==0){
+//         return 1;
+//     }
+//     if(e%2 == 0){
+//         int pot;
+//         pot=potencia(b,e/2);
+//         return pot * pot;
+//     }else{
+//         return b*potencia(b,e-1);
+//     }
+// }
+
+// Implemente uma função recursiva int conta(const int v[], int n, int x) que re-
+// torne quantas vezes o valor x aparece no vetor v de tamanho n. Escreva um programa
+// que leia n, os n elementos do vetor e o valor x, e imprima o resultado.
+// #include <stdio.h>
+// #include <stdlib.h>
+// int conta(const int v[], int n, int x);
+// int main(){
+//     int *v,n,x,i;
+//     printf("Digite o tamanho do vetor:\n");
+//     scanf("%d",&n);
+//     v=malloc(n*sizeof(int));
+//     if(v == NULL){
+//         printf("Erro de alocacao!");
+//         return 1;
+//     }
+//     printf("Digite um valor de X:\n");
+//     scanf("%d",&x);
+//     for(i=0;i<n;i++){
+//         printf("Digite o valor %d do vetor:\n",i);
+//         scanf("%d",&v[i]);
+//     }
+//     printf("O valor de X (%d) aparece %d vezes no vetor!",x,conta(v,n,x));
+//     free(v);
+//     return 0;
+// }
+
+
+// int conta(const int v[], int n, int x){
+//     n--;
+//     if(n<0){
+//         return 0;
+
+//     }
+//     if(v[n] == x){
+//         return 1+conta(v,n,x);
+//     }else{
+//         return conta(v,n,x);
+//     }
+// }
+
+// O problema da Torre de Hanói consiste em três hastes, denominadas A, B e C, e n dis-
+// cos de tamanhos distintos, inicialmente empilhados na haste A em ordem decrescente de
+// tamanho (o maior na base). O objetivo é mover todos os discos para a haste C, movendo
+// um disco por vez e nunca colocando um disco maior sobre um menor. Implemente uma
+// função recursiva void hanoi(int n, char origem, char destino, char auxiliar) que
+// imprima a sequência de movimentos e, ao final, o número total de movimentos realiza-
+// dos.
+
+// Considere uma grade com m linhas e n colunas. Partindo do canto superior esquerdo,
+// deseja-se chegar ao canto inferior direito movendo-se apenas para a direita ou para baixo.
+// Implemente uma função recursiva int caminhos(int m, int n) que retorne a quanti-
+// dade de caminhos distintos possíveis.
+// Dica: Observe que, em uma grade com uma única linha ou uma única coluna, existe
+// apenas um caminho.
+
+//passar m e n com os valores dos indices da ultima linha e coluna
 #include <stdio.h>
-#include <stdlib.h>
-int calcula_size_substring(int head,int *numbers,int numbers_size,int init,int actual);
+int caminhos(int m,int n);
 int main(){
-    int *numbers,numbers_size,i;
-    printf("Digite o tamanho do vetor:\n");
-    scanf("%d",&numbers_size);
-    numbers=malloc(sizeof(int)*numbers_size);
-    for(i=0;i<numbers_size;i++){
-        printf("Digite o numero %d do vetor:\n",i);
-        scanf("%d",&numbers[i]);
-    }
-    printf("A maior sequencia crescente eh de:%d",calcula_size_substring(1,numbers,numbers_size,0,0));
-    free(numbers);
+    printf("%d",caminhos(3-1,3-1));
     return 0;
 }
-int calcula_size_substring(int head,int *numbers,int numbers_size,int init,int actual_ptr){
-    if(head == 1){
-        int i,biggest=-1,actual_size_substring;
-        for(i=0;i<numbers_size;i++){
-            actual_size_substring=calcula_size_substring(0,numbers,numbers_size,i,i);
-           
-            if(actual_size_substring>biggest){
-                
-                biggest=actual_size_substring;
-            }
-        }
-        return biggest;
-    }else{
-        
-        if(init==numbers_size){
-            return 1;
-        }else if(numbers[init]>numbers[actual_ptr]){
-            
-            actual_ptr=init;
-            init++;
-           
-            return 1+calcula_size_substring(0,numbers,numbers_size,init,actual_ptr);
-        }else{
-           
-            init++;
-            return calcula_size_substring(0,numbers,numbers_size,init,actual_ptr);
-        }
+
+//passar m e n com os valores dos indices da ultima linha e coluna
+int caminhos(int m,int n){
+    if(m==0 || n==0){
+        return 1;
+    }
+    else{
+        // esse caminhos vai se expandindo como uma teia d aranha,quando ele chegar na linha
+        // ou na coluna de 0,0,ele vai falar "opa,achei um caminho" e retornar 1
+        // e assim vai recursivamente!
+        // ps:fzr por fatorial é bem mais fácil!
+        return 0+caminhos(m-1,n)+caminhos(m,n-1);
     }
 }
