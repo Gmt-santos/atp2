@@ -229,23 +229,180 @@
 // n degraus, faça uma função recursiva que calcule de quantas maneiras distintas você pode
 // completar essa jornada até o topo, utilizando combinações de passos simples e duplos.
 // Dica: esse é um problema que envolve combinatória.
+// #include <stdio.h>
+// #include <stdlib.h>
+// int calcular_comb(int ,int ,int);
+// int fat(int n);
+// int main(){
+//     int total;
+//     printf("Digite o numero de degraus:\n");
+//     scanf("%d",&total);
+   
+//     printf("O total de maneiras eh de %d",calcular_comb(0,total,total));
+//     return 0;
+// }
+//     int calcular_comb(int dois,int uns,int total_atual){
+//         int cont_num,cont_den_1,cont_den_2;
+        
+        
+    
+//         if(uns<0){
+//             // nn cabe mais nenhum dois nos espacos!!!!!
+//             //Ex: 8 degraus com 4 passos de 2 e 0 passos de 1
+//             // Na proxima chamada,a funcao vai,obrigatoriamente,sempre receber passos de 1 negativo,
+//             ///pq nn cabe mais uns nem dois!!!
+//             // RETORRRNAAAARRR
+//             return 0;
+//         }
+//         else{
+        
+//             cont_num=fat(total_atual);
+//             cont_den_1=fat(uns);
+//             cont_den_2=fat(dois);
+//             dois++;//aumenta o dois
+//             uns-=2;// diminui os uns pra manter a conta
+//             total_atual--;//diminui o 'espaço' da permutacao
+//                      formula da permutacao com repeticao!!!
+//             return (cont_num/(cont_den_1*cont_den_2))+calcular_comb(dois,uns,total_atual);
+            
+//         }
+//     }
+//     int fat(int n){
+//         if(n <=1){
+//             return 1;
+//         }else{
+//             int aux=n-1;
+//             return n*fat(aux);
+//         }
+//     }
+
+
+
+// Considere que você tenha em mãos uma combinação de letras ou números que deseja
+// explorar. Agora, imagine que seu objetivo é descobrir todas as formas possíveis de reor-
+// ganizar essa sequência, considerando que alguns dos caracteres possam se repetir. Dessa
+// forma, cada nova disposição dos caracteres é uma variação única, e você deve garantir que
+// todas essas variações sejam geradas e exibidas. Sua missão, portanto, é criar uma função
+// capaz de receber uma cadeia de caracteres como entrada e, em seguia, imprimir na saída
+// padrão todas as permutações possíveis, incluindo aquelas que surgem devido à repetição
+// de variantes. Cada permutação deve ser listada, revelando todas as diferentes maneiras de
+// reorganizar a sequência original.
+
+
+// A multiplicação camponesa, também referida como multiplicação russa ou egípcia, é um
+// método arcaico que se fundamenta em operações elementares de adição e duplicação. Este
+// procedimento, historicamente associado a diversas civilizações antigas, como a egípcia,
+// a russa e a babilônica, demonstra a engenhosidade dessas culturas ao realizar multipli-
+// cações de números arbitrários, mesmo na ausência de técnicas aritméticas sofisticadas para
+// a época. Dessa forma, a essência desse método reside na decomposição dos números en-
+// volvidos, utilizando unicamente operações de soma, duplicação e redução pela metade.
+// #include <stdio.h>
+// int mult_camp(int x,int y);
+// int main(){
+//     int x,y;
+//     printf("Digite seu x:\n");
+//     scanf("%d",&x);
+//     printf("Digite seu y:\n");
+//     scanf("%d",&y);
+//     printf("Mult.Camponesa=%d\nMult.normal=%d",mult_camp(x,y),x*y);
+//     return 0;
+// }
+// int mult_camp(int x,int y){
+    
+//     if(x == 1){
+//         return y;
+
+//     }
+//     else{
+//         if(x%2==1){
+//             return y+mult_camp(x/2,y*2);
+//         }
+//         else{
+//             return mult_camp(x/2,y*2);
+//         }
+//     }
+// }
+
+
+// Pense que você está trabalhando em um projeto de programação e se depara com um prob-
+// lema interessante: gerar todas as combinações possíveis de parênteses, em que cada parên-
+// tese aberto é devidamente fechado. Esse problema, embora pareça simples à primeira vista,
+// requer uma abordagem cuidadosa para garantir que todas as combinações geradas sejam
+// válidas, ou seja, que não existam parênteses abertos sem seu correspondente fechamento.
+// A tarefa é implementar uma função recursiva que receba um número natural n ≥ 1, repre-
+// sentando o número de pares de parênteses, e que produza todas as combinações possíveis
+// desses pares. O problema está em assegurar que cada combinação gerada seja estrutu-
+// ralmente correta, com todos os parêntese aninhados e fechados na ordem correta. Este
+// tipo de problema é comum em áreas que envolvem análise de expressões matemáticas ou
+// linguagem de programação, em que a correta abertura e fechamento de parênteses é fun-
+// damental.
+
+
+// Em uma antiga biblioteca, escondida entre livros empoeirados e manuscritos esquecidos,
+// havia um enigma que desafiava estudiosos há gerações. Conta-se que, em tempos imemo-
+// riais, um sábio matemático registrou uma longa sequência de números em um pergam-
+// inho. Esta sequência, aparentemente caótica e sem sentido, guardava um segredo que
+// ninguém conseguia decifrar. O desafio deixado pelo matemático era simples de enunciar,
+// mas incrivelmente difícil de resolver para a época: encontrar, dentro daquela sequência,
+// a subsequência mais longa em que os números apareciam em ordem crescente. Muitos
+// estudiosos passaram anos tentando decifrar o enigma, mas poucos conseguiram perceber
+// que, por trás da desordem, havia uma harmonia sutil. A missão era revelar o tamanho
+// dessa linha oculta de números, que, apesar de dispersos, formavam uma progressão cres-
+// cente quando dispostos corretamente. Aqueles que conseguiam desvendar o padrão es-
+// condido na sequência eram recompensados com um profundo entendimento das leis da
+// matemática e da própria natureza do caos e da ordem. O pergaminho, portanto, não era
+// apenas um enigma, mas também uma lição sobre a busca pela ordem dentro do caos, e
+// sobre como a paciência e a perseverança podem relevar a beleza escondida em meio à
+// aparente desordem. Assim, sua missão, portanto, é utilizar as ferramentas de recursivi-
+// dade para encontrar o tamanho dessa subsequência mais longa dentro desse pergaminho.
+// A entrada é composta pela quantidade n de números, seguida dos n números. Exemplo:
+// para a entrada [6, 2, 5, 1, 7, 4, 8, 3], a função encontra que a subsequência crescente mais
+// longa é [2, 5, 7, 8], com 4 elementos, portanto, a saída é 4.
+
+
+// Atenção: O código fornece uma solução boa mas nao perfeita,há casos q ela nn funciona,trabalhar nela dps!!!
 #include <stdio.h>
 #include <stdlib.h>
-int calcular_comb(int dois,int uns,int total);
+int calcula_size_substring(int head,int *numbers,int numbers_size,int init,int actual);
 int main(){
-    int total;
-    printf("Digite o numero de degraus:\n");
-    scanf("%d",&total);
-    calcular_comb(0,total,total);
+    int *numbers,numbers_size,i;
+    printf("Digite o tamanho do vetor:\n");
+    scanf("%d",&numbers_size);
+    numbers=malloc(sizeof(int)*numbers_size);
+    for(i=0;i<numbers_size;i++){
+        printf("Digite o numero %d do vetor:\n",i);
+        scanf("%d",&numbers[i]);
+    }
+    printf("A maior sequencia crescente eh de:%d",calcula_size_substring(1,numbers,numbers_size,0,0));
+    free(numbers);
     return 0;
 }
-int calcular_comb(int dois,int uns,int total){
-    int cont_num,cont_den_1,cont_den_2;
-    int i;
-    if((dois+1)*2>total){
-        return 0;
+int calcula_size_substring(int head,int *numbers,int numbers_size,int init,int actual_ptr){
+    if(head == 1){
+        int i,biggest=-1,actual_size_substring;
+        for(i=0;i<numbers_size;i++){
+            actual_size_substring=calcula_size_substring(0,numbers,numbers_size,i,i);
+           
+            if(actual_size_substring>biggest){
+                
+                biggest=actual_size_substring;
+            }
+        }
+        return biggest;
     }else{
-        //calcular fatorial das formuls
         
+        if(init==numbers_size){
+            return 1;
+        }else if(numbers[init]>numbers[actual_ptr]){
+            
+            actual_ptr=init;
+            init++;
+           
+            return 1+calcula_size_substring(0,numbers,numbers_size,init,actual_ptr);
+        }else{
+           
+            init++;
+            return calcula_size_substring(0,numbers,numbers_size,init,actual_ptr);
+        }
     }
 }
