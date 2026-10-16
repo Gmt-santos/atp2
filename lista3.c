@@ -286,8 +286,37 @@
 // capaz de receber uma cadeia de caracteres como entrada e, em seguia, imprimir na saída
 // padrão todas as permutações possíveis, incluindo aquelas que surgem devido à repetição
 // de variantes. Cada permutação deve ser listada, revelando todas as diferentes maneiras de
-// reorganizar a sequência original.
+// reorganizar a sequência original
 
+// Feito com ajuda do GEMINI!!!
+// #include <stdio.h>
+// #include <stdlib.h>
+// #include <string.h>
+// void permuta(char *,int ,int);
+// int main(){
+//     char palavra[256]="arara";
+//     permuta(palavra,0,strlen(palavra)-1);
+//     return 0;
+// }
+// void permuta(char *str,int esquerda,int direita){
+//     if(esquerda == direita){
+//         printf("%s\n",str);
+//         return;
+//     }else{
+//         int i;
+//         char aux;
+//         for(i=esquerda;i<=direita;i++){
+//             aux=str[esquerda];
+//             str[esquerda]=str[i];
+//             str[i]=aux;
+//             permuta(str,esquerda+1,direita);
+//             aux=str[i];
+//             str[i]=str[esquerda];
+//             str[esquerda]=aux;
+//         }
+//         return;
+//     }
+// }
 
 // A multiplicação camponesa, também referida como multiplicação russa ou egípcia, é um
 // método arcaico que se fundamenta em operações elementares de adição e duplicação. Este
@@ -336,6 +365,74 @@
 // tipo de problema é comum em áreas que envolvem análise de expressões matemáticas ou
 // linguagem de programação, em que a correta abertura e fechamento de parênteses é fun-
 // damental.
+// #include <stdio.h>
+// #include <stdlib.h>
+// void permuta_parenteses(int first_rec,char *str,int n,int esquerda,int direita);
+// int trocar_ou_nao(char*str,int esquerda,int direita);
+// int main(){
+//     permuta_parenteses(1,"",3,0,3*2-1);
+//     return 0;
+// }
+// int trocar_ou_nao(char*str,int esquerda,int direita){
+//     int i;
+//     for(i=esquerda;i<direita;i++){
+//         if(str[i] == str[direita]){
+//             return 0;
+//         }
+//     }
+//     return 1;
+// }
+// void permuta_parenteses(int first_rec,char *str,int n,int esquerda,int direita){
+//     int i;
+//     if(first_rec == 1){
+//         char *new_str=malloc(n*2);
+//         for(i=0;i<n;i++){
+//             new_str[2*i]='(';
+//             new_str[2*i+1]=')';
+//         }
+//         new_str[2*n]='\0';
+//         str=new_str;
+//     }
+//     if(esquerda == direita){
+//         int balanca=0;
+//         for(i=0;i<=direita;i++){
+//             if(str[i] == '('){
+//                 balanca++;
+//             }else{
+//                 balanca--;
+//             }
+//             if(balanca<0){
+//                 break;
+//             }
+//         }
+//         if(balanca==0){
+//             printf("%s\n",str);
+//             return;
+//         }else{
+//             return;
+//         }
+//     }else{
+//         char aux;
+//         for(i=esquerda;i<=direita;i++){
+            
+//             if(trocar_ou_nao(str,esquerda,i)){
+                
+//                 aux=str[esquerda];
+//                 str[esquerda]=str[i];
+//                 str[i]=aux;
+//                 permuta_parenteses(0,str,n,esquerda+1,direita);
+//                 aux=str[i];
+//                 str[i]=str[esquerda];
+//                 str[esquerda]=aux;
+//             }
+            
+            
+            
+//         }
+//         return ;
+//     }
+    
+// }
 
 
 // Em uma antiga biblioteca, escondida entre livros empoeirados e manuscritos esquecidos,
@@ -514,23 +611,23 @@
 // apenas um caminho.
 
 //passar m e n com os valores dos indices da ultima linha e coluna
-#include <stdio.h>
-int caminhos(int m,int n);
-int main(){
-    printf("%d",caminhos(3-1,3-1));
-    return 0;
-}
+// #include <stdio.h>
+// int caminhos(int m,int n);
+// int main(){
+//     printf("%d",caminhos(3-1,3-1));
+//     return 0;
+// }
 
-//passar m e n com os valores dos indices da ultima linha e coluna
-int caminhos(int m,int n){
-    if(m==0 || n==0){
-        return 1;
-    }
-    else{
-        // esse caminhos vai se expandindo como uma teia d aranha,quando ele chegar na linha
-        // ou na coluna de 0,0,ele vai falar "opa,achei um caminho" e retornar 1
-        // e assim vai recursivamente!
-        // ps:fzr por fatorial é bem mais fácil!
-        return 0+caminhos(m-1,n)+caminhos(m,n-1);
-    }
-}
+// //passar m e n com os valores dos indices da ultima linha e coluna
+// int caminhos(int m,int n){
+//     if(m==0 || n==0){
+//         return 1;
+//     }
+//     else{
+//         // esse caminhos vai se expandindo como uma teia d aranha,quando ele chegar na linha
+//         // ou na coluna de 0,0,ele vai falar "opa,achei um caminho" e retornar 1
+//         // e assim vai recursivamente!
+//         // ps:fzr por fatorial é bem mais fácil!
+//         return 0+caminhos(m-1,n)+caminhos(m,n-1);
+//     }
+// }
