@@ -603,6 +603,31 @@
 // imprima a sequência de movimentos e, ao final, o número total de movimentos realiza-
 // dos.
 
+#include <stdio.h>
+
+void hanoi(int n, char origem, char destino, char auxiliar) {
+    // Caso base: apenas 1 disco para mover
+    if (n == 1) {
+        printf("Move o disco 1 da haste %c para a haste %c\n", origem, destino);
+        return;
+    }
+
+    // Passo 1: mover n-1 discos da origem para o auxiliar
+    hanoi(n - 1, origem, auxiliar, destino);
+
+    // Passo 2: mover o disco restante (maior) da origem para o destino
+    printf("Move o disco %d da haste %c para a haste %c\n", n, origem, destino);
+
+    // Passo 3: mover os n-1 discos do auxiliar para o destino
+    hanoi(n - 1, auxiliar, destino, origem);
+}
+
+int main() {
+    int n = 4; // Número de discos
+    hanoi(n, 'A', 'C', 'B'); // 'A' é a origem, 'C' o destino, 'B' o auxiliar
+    return 0;
+}
+
 // Considere uma grade com m linhas e n colunas. Partindo do canto superior esquerdo,
 // deseja-se chegar ao canto inferior direito movendo-se apenas para a direita ou para baixo.
 // Implemente uma função recursiva int caminhos(int m, int n) que retorne a quanti-
@@ -631,3 +656,4 @@
 //         return 0+caminhos(m-1,n)+caminhos(m,n-1);
 //     }
 // }
+
