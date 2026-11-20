@@ -1,15 +1,17 @@
 #include <stdio.h>
 #include <stdlib.h>
-typedef struct{
+typedef struct No{
     int dado;
     int prox;
 }No;
-typedef struct{
+typedef struct Lista{
     No* inicio;
     No* fim;
     int tamanho;
 }Lista;
 Lista lista;
+
+
 void inserir_no_inicio(Lista*,int); 
 int lista_vazia(Lista *);
 void excluir_valor(Lista*,int);
@@ -19,11 +21,14 @@ void percorrer_lista(Lista*);
 int buscar_valor(Lista*,int);
 No* obter_elemento(Lista *,int);
 void liberar_lista(Lista*);
+
+
 int main(){
     int option,data;
     lista.inicio=NULL;
     lista.fim=NULL;
     lista.tamanho=0;
+
     while(1){
         printf("\n -------------------------------------------------\n");
         printf("Digite as opcoes:\n1-Inserir no inicio\n2-Excluir no inicio\n3-Inserir no fim\n4-Excluir no fim\n5-Percorrer a lista\n");
@@ -31,18 +36,23 @@ int main(){
         printf("9-Tamanho da lista\n10-Excluir valor da lista\n");
         printf("\n -------------------------------------------------\n");
         scanf("%d",&option);
+
         if(option == 1){
             printf("Digite o dado:\n");
             scanf("%d",&data);
             inserir_no_inicio(&lista,data);
+
         }else if(option==2){
             excluir_no_inicio(&lista);
+
         }else if(option==3){
             printf("Digite o dado:\n");
             scanf("%d",&data);
             inserir_no_fim(&lista,data);
+
         }else if(option == 4){
             excluir_no_fim(&lista);
+
         }else if(option==5){
             percorrer_lista(&lista);
 
@@ -55,6 +65,7 @@ int main(){
                 printf("Lista nao vazia!\n");
             }
 
+
         }else if(option == 7){
             int result;
             printf("Digite o dado:\n");
@@ -66,6 +77,7 @@ int main(){
             }else{
                 printf("O dado nao esta na lista!\n");
             }
+
         }else if(option == 8){
             No* aux;
             printf("Digite o indice do dado:\n");
@@ -76,21 +88,26 @@ int main(){
             }else{
                 printf("Dado nao encontrado nesse indice!\n");
             }
+
         }
         else if(option == 9){
             printf("%d\n",lista.tamanho);
+
         }
         else if(option == 10){
             printf("Digite o dado:\n");
             scanf("%d",&data);
             excluir_valor(&lista,data);
+
         }
         else if(option == 100){
             liberar_lista(&lista);
             printf("\nEncerrando...");
             break;
+
         }else{
             printf("Opcao invalida!\n");
+
         }
 
     }
@@ -244,8 +261,10 @@ void excluir_valor(Lista* lista,int buscado){
         free(atual);
         if(lista->inicio==NULL){
             lista->fim=NULL;
+            return;
         }
         lista->tamanho--;
+        
     }else{
         anterior=atual;
         atual=atual->prox;
