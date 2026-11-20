@@ -717,180 +717,406 @@ void inserir_no_inicio(Lista* lista,int dado){
 // g) BUSCA(L, x): Retorne 1 se o elemento x estiver na lista L. Caso contrário, retorne o valor 0.
 // h) TAMANHO(L): Retorne o comprimento da lista L.
 // Note: Garanta que o tempo de execução dessa função seja Θ(1).
-typedef struct Node{
-    int dado;
-    struct Node * proximo;
-}Node;
-typedef struct linkedlist{
-    int tamanho;
-    Node* inicio;
-    Node* fim;
-}linkedlist;
-void insercao_cabeca(linkedlist * L,int x){
-    Node* novo_inicio;
-    novo_inicio=malloc(sizeof(Node));
-    if(novo_inicio==NULL){
-        return;
-    }
-    novo_inicio->dado=x;
-    novo_inicio->proximo=L->inicio;
-    L->inicio=novo_inicio;
-    L->tamanho++;
-    if(novo_inicio->proximo==NULL){
-        L->fim=novo_inicio;
-    }
-    return ;
-}
-void insercao_cauda(linkedlist * L,int x){
-    Node * novo_fim;
-    Node *ptr=L->fim;
-    novo_fim=malloc(sizeof(Node));
-    if(novo_fim==NULL){
-        return;
-    }
-    novo_fim->dado=x;
-    novo_fim->proximo=NULL;
-    if(ptr==NULL){
-        L->inicio=novo_fim;
-        L->fim=novo_fim;
-    }else{
-        ptr->proximo=novo_fim;
-        L->fim=novo_fim;
-    }
-    L->tamanho++;
-    return;
-}
-void insercao_meio(linkedlist * L,int x,int k){
-    if(k>(L->tamanho)+1|| k<1){
-        return;
-    }
-    Node * novo_node=malloc(sizeof(Node));
-    if(novo_node==NULL){
-        return;
-    }
-    novo_node->dado=x;
-    if(k==1){
-        novo_node->proximo=L->inicio;
-        L->inicio=novo_node;
-        if(novo_node->proximo==NULL){
-            L->fim=novo_node;
-        }
-    }else if(k==(L->tamanho)+1){
-        novo_node->proximo=NULL;
-        if(L->fim!=NULL){
-            L->fim->proximo=novo_node;
-            L->fim=novo_node;
-        }else{
-            L->fim=novo_node;
-            L->inicio=novo_node;
-        }
+// typedef struct Node{
+//     int dado;
+//     struct Node * proximo;
+// }Node;
+// typedef struct linkedlist{
+//     int tamanho;
+//     Node* inicio;
+//     Node* fim;
+// }linkedlist;
+// void insercao_cabeca(linkedlist * L,int x){
+//     Node* novo_inicio;
+//     novo_inicio=malloc(sizeof(Node));
+//     if(novo_inicio==NULL){
+//         return;
+//     }
+//     novo_inicio->dado=x;
+//     novo_inicio->proximo=L->inicio;
+//     L->inicio=novo_inicio;
+//     L->tamanho++;
+//     if(novo_inicio->proximo==NULL){
+//         L->fim=novo_inicio;
+//     }
+//     return ;
+// }
+// void insercao_cauda(linkedlist * L,int x){
+//     Node * novo_fim;
+//     Node *ptr=L->fim;
+//     novo_fim=malloc(sizeof(Node));
+//     if(novo_fim==NULL){
+//         return;
+//     }
+//     novo_fim->dado=x;
+//     novo_fim->proximo=NULL;
+//     if(ptr==NULL){
+//         L->inicio=novo_fim;
+//         L->fim=novo_fim;
+//     }else{
+//         ptr->proximo=novo_fim;
+//         L->fim=novo_fim;
+//     }
+//     L->tamanho++;
+//     return;
+// }
+// void insercao_meio(linkedlist * L,int x,int k){
+//     if(k>(L->tamanho)+1|| k<1){
+//         return;
+//     }
+//     Node * novo_node=malloc(sizeof(Node));
+//     if(novo_node==NULL){
+//         return;
+//     }
+//     novo_node->dado=x;
+//     if(k==1){
+//         novo_node->proximo=L->inicio;
+//         L->inicio=novo_node;
+//         if(novo_node->proximo==NULL){
+//             L->fim=novo_node;
+//         }
+//     }else if(k==(L->tamanho)+1){
+//         novo_node->proximo=NULL;
+//         if(L->fim!=NULL){
+//             L->fim->proximo=novo_node;
+//             L->fim=novo_node;
+//         }else{
+//             L->fim=novo_node;
+//             L->inicio=novo_node;
+//         }
 
-    }else{
-        int counter=1;
-        Node * ptr=L->inicio,*aux;
-        while(counter+1!=k){
-            ptr=ptr->proximo;
-            counter++;
-        }
-        aux=ptr->proximo;
-        ptr->proximo=novo_node;
-        novo_node->proximo=aux;
+//     }else{
+//         int counter=1;
+//         Node * ptr=L->inicio,*aux;
+//         while(counter+1!=k){
+//             ptr=ptr->proximo;
+//             counter++;
+//         }
+//         aux=ptr->proximo;
+//         ptr->proximo=novo_node;
+//         novo_node->proximo=aux;
 
-    }
-    L->tamanho++;
-    return;
-}
-void delecao_cabeca(linkedlist *L){
-    if(L->inicio==NULL){
-        return;
-    }
-    Node * aux;
-    aux=L->inicio->proximo;
-    free(L->inicio);
-    L->inicio=aux;
-    L->tamanho--;
-    if(aux==NULL){
-        L->fim=NULL;
-        return;
-    }
-    if(aux->proximo==NULL){
-        L->fim=aux;
-    }
+//     }
+//     L->tamanho++;
+//     return;
+// }
+// void delecao_cabeca(linkedlist *L){
+//     if(L->inicio==NULL){
+//         return;
+//     }
+//     Node * aux;
+//     aux=L->inicio->proximo;
+//     free(L->inicio);
+//     L->inicio=aux;
+//     L->tamanho--;
+//     if(aux==NULL){
+//         L->fim=NULL;
+//         return;
+//     }
+//     if(aux->proximo==NULL){
+//         L->fim=aux;
+//     }
   
-}
-void delecao_cauda(linkedlist *L){
-    if(L->fim==NULL){
+// }
+// void delecao_cauda(linkedlist *L){
+//     if(L->fim==NULL){
+//         return;
+//     }
+//     if(L->fim==L->inicio){
+//         free(L->fim);
+//         L->inicio=NULL;
+//         L->fim=NULL;
+//         L->tamanho--;
+//         return ;
+//     }
+//     Node * ptr=L->inicio;
+//     while(ptr->proximo!=L->fim){
+//         ptr=ptr->proximo;
+//     }
+//     free(L->fim);
+//     L->fim=ptr;
+//     ptr->proximo=NULL;
+//     L->tamanho--;
+//     return;
+// }
+// void delecao_meio(linkedlist *L,int k){
+//     if(k<1 || k>L->tamanho){
+//         return ;
+//     }
+//     if(L->inicio==NULL){
+//         return;
+//     }
+//     Node *aux,*antes,*depois;
+//     int counter=1;
+//     if(k==1){
+//         if(L->inicio->proximo==NULL){
+//             free(L->inicio);
+//             L->inicio=NULL;
+//             L->fim=NULL;
+//             L->tamanho--;
+//             return;
+//         }
+//         aux=L->inicio->proximo;
+//         free(L->inicio);
+//         L->inicio=aux;
+//         L->tamanho--;
+//         return;
+//     }else if(k==L->tamanho){
+//         antes=L->inicio;
+//         while(antes->proximo!=L->fim){
+//             antes=antes->proximo;
+//         }
+//         free(L->fim);
+//         antes->proximo=NULL;
+//         L->fim=antes;
+//         L->tamanho--;
+//         return ;
+//     }else{
+//         antes=L->inicio;
+//         depois=antes->proximo;
+//         while(counter+1!=k){
+//             antes=antes->proximo;
+//             depois=depois->proximo;
+//             counter++;
+//         }
+//         aux=depois->proximo;
+//         free(depois);
+//         antes->proximo=aux;
+//         L->tamanho--;
+//     }
+//     return;
+// }
+// int busca(linkedlist * L,int x){
+//     if(L->inicio ==  NULL){
+//         return 0;
+//     }
+//     Node * ptr=L->inicio;
+//     while(ptr!=NULL){
+//         if(ptr->dado==x){
+//             return 1;
+//         }
+//         ptr=ptr->proximo;
+//     }
+//     return 0;
+// }
+// int tamanho(linkedlist *L){
+//     return L->tamanho;
+// }
+
+
+// 1.12. Implemente uma lista duplamente ligada e dinamicamente alocada contendo as seguintes
+// operações de inserção, busca e remoção:
+// a) INSERÇÃO-CABEÇA(L, x): Inserção do elemento x na cabeça da lista L.
+// Note: Garanta que o tempo de execução dessa função seja Θ(1).
+// b) INSERÇÃO-CAUDA(L, x): Inserção do elemento x na cabeça da lista L.
+// Note: Garanta que o tempo de execução dessa função seja Θ(1).
+// c) INSERÇÃO-MEIO(L, x, k): Inserção do elemento x na k-ésima posição da lista N. Você deve
+// tratar a condição que k ∈ [1, N + 1], em que N é o comprimento da lista L.
+// d) DELEÇÃO-CABEÇA(L): Remoção do elemento na cabeça da lista L.
+// Note: Garanta que o tempo de execução dessa função seja Θ(1).
+// e) DELEÇÃO-CAUDA(L): Remoção do elemento do fim da lista L.
+// Note: Garanta que o tempo de execução dessa função seja Θ(1).
+// f) DELEÇÃO-MEIO(L, k): Deleção do k-ésimo elemento da lista L. Você deve tratar a condição
+// que k ∈ [1, N], em que N é o comprimento da lista.
+// g) BUSCA(L, x): Retorne 1 se o elemento x estiver na lista L. Caso contrário, retorne o valor 0.
+// h) TAMANHO(L): Retorne o comprimento da lista L.
+// Note: Garanta que o tempo de execução dessa função seja Θ(1).
+typedef struct Node{
+    struct Node * anterior;
+    struct Node * proximo;
+    int dado;
+}Node;
+typedef struct double_linkedlist{
+    Node * inicio;
+    Node * fim;
+    int tamanho;
+} double_linkedlist;
+
+void insercao_cabeca(double_linkedlist * L,int dado){
+    Node * novo=malloc(sizeof(Node));
+    if(novo == NULL){
         return;
     }
-    if(L->fim==L->inicio){
-        free(L->fim);
-        L->inicio=NULL;
+    novo->dado=dado;
+    novo->proximo=L->inicio;
+    novo->anterior=NULL;
+    if(L->inicio==NULL){
+        L->fim=novo;
+        L->inicio=novo;
+        L->tamanho++;
+        return;
+    }
+    else{
+        L->inicio->anterior=novo;
+        L->inicio=novo;
+        L->tamanho++;
+        return;
+    }
+}
+void insercao_cauda(double_linkedlist *L,int dado){
+    Node * novo=malloc(sizeof(Node));
+    if(novo == NULL){
+        return ;
+    }
+    novo->dado=dado;
+    novo->proximo=NULL;
+    novo->anterior=L->fim;
+    if(L->fim==NULL){
+        L->inicio=novo;
+    }
+    else{
+        L->fim->proximo=novo;
+    }
+    L->fim=novo;
+    L->tamanho++;
+    return;
+}
+
+void insercao_meio(double_linkedlist *L,int dado,int k){
+    Node * novo=malloc(sizeof(Node));
+    int counter=1;
+    if(novo == NULL){
+        return;
+    }
+    if(k<1 || k>(L->tamanho+1)){
+        free(novo);
+        return;
+    }
+    novo->dado=dado;
+
+    if(k==1){
+        if(L->inicio==NULL){
+            novo->proximo=NULL;
+            novo->anterior=NULL;
+            L->inicio=novo;
+            L->fim=novo;
+            L->tamanho++;
+            return;
+        }
+        novo->anterior=NULL;
+        novo->proximo=L->inicio;
+        L->inicio->anterior=novo;
+        L->inicio=novo;
+        L->tamanho++;
+        return;
+    }else if(k==(L->tamanho+1)){
+        L->fim->proximo=novo;
+        novo->anterior=L->fim;
+        L->fim=novo;
+        novo->proximo=NULL;
+        L->tamanho++;
+        return;
+    }else{
+        Node * antes=L->inicio;
+        Node * atual=L->inicio->proximo;
+        while(counter+1!=k){
+            counter++;
+            antes=antes->proximo;
+            atual=atual->proximo;
+        }
+        atual->anterior=novo;
+        novo->proximo=atual;
+        antes->proximo=novo;
+        novo->anterior=antes;
+        L->tamanho++;
+        return;
+    }
+    
+}
+void delecao_cabeca(double_linkedlist *L){
+    Node * aux;
+    if(L->inicio == NULL){
+        return;
+    }
+    if(L->inicio == L->fim){
+        free(L->inicio);
         L->fim=NULL;
+        L->inicio=NULL;
         L->tamanho--;
         return ;
     }
-    Node * ptr=L->inicio;
-    while(ptr->proximo!=L->fim){
-        ptr=ptr->proximo;
-    }
-    free(L->fim);
-    L->fim=ptr;
-    ptr->proximo=NULL;
+    aux=L->inicio->proximo;
+    free(L->inicio);
+    aux->anterior=NULL;
+    L->inicio=aux;
     L->tamanho--;
     return;
 }
-void delecao_meio(linkedlist *L,int k){
+
+void delecao_cauda(double_linkedlist *L){
+    Node * aux;
+    if(L->inicio==NULL){
+        return;
+    }else if(L->inicio==L->fim){
+        free(L->fim);
+        L->fim=NULL;
+        L->inicio=NULL;
+        L->tamanho--;
+        return;
+    }
+    aux=L->fim->anterior;
+    free(L->fim);
+    aux->proximo=NULL;
+    L->fim=aux;
+    L->tamanho--;   
+    return;
+}
+void delecao_meio(double_linkedlist * L,int k){
+    Node * aux;
+    int counter=1;
     if(k<1 || k>L->tamanho){
-        return ;
+        return;
+    }
+    if(L==NULL){
+        return;
     }
     if(L->inicio==NULL){
         return;
     }
-    Node *aux,*antes,*depois;
-    int counter=1;
     if(k==1){
-        if(L->inicio->proximo==NULL){
-            free(L->inicio);
-            L->inicio=NULL;
+        aux=L->inicio->proximo;
+        free(L->inicio);
+        if(aux==NULL){
             L->fim=NULL;
+            L->inicio=NULL;
             L->tamanho--;
             return;
         }
-        aux=L->inicio->proximo;
-        free(L->inicio);
+        aux->anterior=NULL;
         L->inicio=aux;
         L->tamanho--;
         return;
     }else if(k==L->tamanho){
-        antes=L->inicio;
-        while(antes->proximo!=L->fim){
-            antes=antes->proximo;
-        }
+        aux=L->fim->anterior;
         free(L->fim);
-        antes->proximo=NULL;
-        L->fim=antes;
+        aux->proximo=NULL;
+        L->fim=aux;
         L->tamanho--;
-        return ;
     }else{
+        Node * antes,*atual;
         antes=L->inicio;
-        depois=antes->proximo;
+        atual=antes->proximo;
         while(counter+1!=k){
             antes=antes->proximo;
-            depois=depois->proximo;
+            atual=atual->proximo;
             counter++;
         }
-        aux=depois->proximo;
-        free(depois);
+        aux=atual->proximo;
         antes->proximo=aux;
+        aux->anterior=antes;
+        free(atual);
         L->tamanho--;
+        return;
     }
-    return;
 }
-int busca(linkedlist * L,int x){
-    if(L->inicio ==  NULL){
+int busca(double_linkedlist *L,int x){
+    if(L==NULL){
         return 0;
     }
-    Node * ptr=L->inicio;
+    if(L->inicio==NULL){
+        return 0;
+    }
+    Node *ptr=L->inicio;
     while(ptr!=NULL){
         if(ptr->dado==x){
             return 1;
@@ -899,6 +1125,6 @@ int busca(linkedlist * L,int x){
     }
     return 0;
 }
-int tamanho(linkedlist *L){
+int tamanho(double_linkedlist *L){
     return L->tamanho;
 }
