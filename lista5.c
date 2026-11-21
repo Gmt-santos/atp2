@@ -921,210 +921,820 @@ void inserir_no_inicio(Lista* lista,int dado){
 // g) BUSCA(L, x): Retorne 1 se o elemento x estiver na lista L. Caso contrário, retorne o valor 0.
 // h) TAMANHO(L): Retorne o comprimento da lista L.
 // Note: Garanta que o tempo de execução dessa função seja Θ(1).
-typedef struct Node{
-    struct Node * anterior;
-    struct Node * proximo;
-    int dado;
-}Node;
-typedef struct double_linkedlist{
-    Node * inicio;
-    Node * fim;
-    int tamanho;
-} double_linkedlist;
+// typedef struct Node{
+//     struct Node * anterior;
+//     struct Node * proximo;
+//     int dado;
+// }Node;
+// typedef struct double_linkedlist{
+//     Node * inicio;
+//     Node * fim;
+//     int tamanho;
+// } double_linkedlist;
 
-void insercao_cabeca(double_linkedlist * L,int dado){
-    Node * novo=malloc(sizeof(Node));
-    if(novo == NULL){
-        return;
-    }
-    novo->dado=dado;
-    novo->proximo=L->inicio;
-    novo->anterior=NULL;
-    if(L->inicio==NULL){
-        L->fim=novo;
-        L->inicio=novo;
-        L->tamanho++;
-        return;
-    }
-    else{
-        L->inicio->anterior=novo;
-        L->inicio=novo;
-        L->tamanho++;
-        return;
-    }
-}
-void insercao_cauda(double_linkedlist *L,int dado){
-    Node * novo=malloc(sizeof(Node));
-    if(novo == NULL){
-        return ;
-    }
-    novo->dado=dado;
-    novo->proximo=NULL;
-    novo->anterior=L->fim;
-    if(L->fim==NULL){
-        L->inicio=novo;
-    }
-    else{
-        L->fim->proximo=novo;
-    }
-    L->fim=novo;
-    L->tamanho++;
-    return;
-}
+// void insercao_cabeca(double_linkedlist * L,int dado){
+//     Node * novo=malloc(sizeof(Node));
+//     if(novo == NULL){
+//         return;
+//     }
+//     novo->dado=dado;
+//     novo->proximo=L->inicio;
+//     novo->anterior=NULL;
+//     if(L->inicio==NULL){
+//         L->fim=novo;
+//         L->inicio=novo;
+//         L->tamanho++;
+//         return;
+//     }
+//     else{
+//         L->inicio->anterior=novo;
+//         L->inicio=novo;
+//         L->tamanho++;
+//         return;
+//     }
+// }
+// void insercao_cauda(double_linkedlist *L,int dado){
+//     Node * novo=malloc(sizeof(Node));
+//     if(novo == NULL){
+//         return ;
+//     }
+//     novo->dado=dado;
+//     novo->proximo=NULL;
+//     novo->anterior=L->fim;
+//     if(L->fim==NULL){
+//         L->inicio=novo;
+//     }
+//     else{
+//         L->fim->proximo=novo;
+//     }
+//     L->fim=novo;
+//     L->tamanho++;
+//     return;
+// }
 
-void insercao_meio(double_linkedlist *L,int dado,int k){
-    Node * novo=malloc(sizeof(Node));
-    int counter=1;
-    if(novo == NULL){
-        return;
-    }
-    if(k<1 || k>(L->tamanho+1)){
-        free(novo);
-        return;
-    }
-    novo->dado=dado;
+// void insercao_meio(double_linkedlist *L,int dado,int k){
+//     Node * novo=malloc(sizeof(Node));
+//     int counter=1;
+//     if(novo == NULL){
+//         return;
+//     }
+//     if(k<1 || k>(L->tamanho+1)){
+//         free(novo);
+//         return;
+//     }
+//     novo->dado=dado;
 
-    if(k==1){
-        if(L->inicio==NULL){
-            novo->proximo=NULL;
-            novo->anterior=NULL;
-            L->inicio=novo;
-            L->fim=novo;
-            L->tamanho++;
-            return;
-        }
-        novo->anterior=NULL;
-        novo->proximo=L->inicio;
-        L->inicio->anterior=novo;
-        L->inicio=novo;
-        L->tamanho++;
-        return;
-    }else if(k==(L->tamanho+1)){
-        L->fim->proximo=novo;
-        novo->anterior=L->fim;
-        L->fim=novo;
-        novo->proximo=NULL;
-        L->tamanho++;
-        return;
-    }else{
-        Node * antes=L->inicio;
-        Node * atual=L->inicio->proximo;
-        while(counter+1!=k){
-            counter++;
-            antes=antes->proximo;
-            atual=atual->proximo;
-        }
-        atual->anterior=novo;
-        novo->proximo=atual;
-        antes->proximo=novo;
-        novo->anterior=antes;
-        L->tamanho++;
-        return;
-    }
+//     if(k==1){
+//         if(L->inicio==NULL){
+//             novo->proximo=NULL;
+//             novo->anterior=NULL;
+//             L->inicio=novo;
+//             L->fim=novo;
+//             L->tamanho++;
+//             return;
+//         }
+//         novo->anterior=NULL;
+//         novo->proximo=L->inicio;
+//         L->inicio->anterior=novo;
+//         L->inicio=novo;
+//         L->tamanho++;
+//         return;
+//     }else if(k==(L->tamanho+1)){
+//         L->fim->proximo=novo;
+//         novo->anterior=L->fim;
+//         L->fim=novo;
+//         novo->proximo=NULL;
+//         L->tamanho++;
+//         return;
+//     }else{
+//         Node * antes=L->inicio;
+//         Node * atual=L->inicio->proximo;
+//         while(counter+1!=k){
+//             counter++;
+//             antes=antes->proximo;
+//             atual=atual->proximo;
+//         }
+//         atual->anterior=novo;
+//         novo->proximo=atual;
+//         antes->proximo=novo;
+//         novo->anterior=antes;
+//         L->tamanho++;
+//         return;
+//     }
     
-}
-void delecao_cabeca(double_linkedlist *L){
-    Node * aux;
-    if(L->inicio == NULL){
-        return;
-    }
-    if(L->inicio == L->fim){
-        free(L->inicio);
-        L->fim=NULL;
-        L->inicio=NULL;
-        L->tamanho--;
-        return ;
-    }
-    aux=L->inicio->proximo;
-    free(L->inicio);
-    aux->anterior=NULL;
-    L->inicio=aux;
-    L->tamanho--;
-    return;
-}
+// }
+// void delecao_cabeca(double_linkedlist *L){
+//     Node * aux;
+//     if(L->inicio == NULL){
+//         return;
+//     }
+//     if(L->inicio == L->fim){
+//         free(L->inicio);
+//         L->fim=NULL;
+//         L->inicio=NULL;
+//         L->tamanho--;
+//         return ;
+//     }
+//     aux=L->inicio->proximo;
+//     free(L->inicio);
+//     aux->anterior=NULL;
+//     L->inicio=aux;
+//     L->tamanho--;
+//     return;
+// }
 
-void delecao_cauda(double_linkedlist *L){
-    Node * aux;
-    if(L->inicio==NULL){
-        return;
-    }else if(L->inicio==L->fim){
-        free(L->fim);
-        L->fim=NULL;
-        L->inicio=NULL;
-        L->tamanho--;
-        return;
-    }
-    aux=L->fim->anterior;
-    free(L->fim);
-    aux->proximo=NULL;
-    L->fim=aux;
-    L->tamanho--;   
-    return;
-}
-void delecao_meio(double_linkedlist * L,int k){
-    Node * aux;
-    int counter=1;
-    if(k<1 || k>L->tamanho){
-        return;
-    }
-    if(L==NULL){
-        return;
-    }
-    if(L->inicio==NULL){
-        return;
-    }
-    if(k==1){
-        aux=L->inicio->proximo;
-        free(L->inicio);
-        if(aux==NULL){
-            L->fim=NULL;
-            L->inicio=NULL;
-            L->tamanho--;
-            return;
-        }
-        aux->anterior=NULL;
-        L->inicio=aux;
-        L->tamanho--;
-        return;
-    }else if(k==L->tamanho){
-        aux=L->fim->anterior;
-        free(L->fim);
-        aux->proximo=NULL;
-        L->fim=aux;
-        L->tamanho--;
-    }else{
-        Node * antes,*atual;
-        antes=L->inicio;
-        atual=antes->proximo;
-        while(counter+1!=k){
-            antes=antes->proximo;
-            atual=atual->proximo;
-            counter++;
-        }
-        aux=atual->proximo;
-        antes->proximo=aux;
-        aux->anterior=antes;
-        free(atual);
-        L->tamanho--;
-        return;
-    }
-}
-int busca(double_linkedlist *L,int x){
-    if(L==NULL){
-        return 0;
-    }
-    if(L->inicio==NULL){
-        return 0;
-    }
-    Node *ptr=L->inicio;
-    while(ptr!=NULL){
-        if(ptr->dado==x){
-            return 1;
-        }
-        ptr=ptr->proximo;
-    }
-    return 0;
-}
-int tamanho(double_linkedlist *L){
-    return L->tamanho;
-}
+// void delecao_cauda(double_linkedlist *L){
+//     Node * aux;
+//     if(L->inicio==NULL){
+//         return;
+//     }else if(L->inicio==L->fim){
+//         free(L->fim);
+//         L->fim=NULL;
+//         L->inicio=NULL;
+//         L->tamanho--;
+//         return;
+//     }
+//     aux=L->fim->anterior;
+//     free(L->fim);
+//     aux->proximo=NULL;
+//     L->fim=aux;
+//     L->tamanho--;   
+//     return;
+// }
+// void delecao_meio(double_linkedlist * L,int k){
+//     Node * aux;
+//     int counter=1;
+//     if(k<1 || k>L->tamanho){
+//         return;
+//     }
+//     if(L==NULL){
+//         return;
+//     }
+//     if(L->inicio==NULL){
+//         return;
+//     }
+//     if(k==1){
+//         aux=L->inicio->proximo;
+//         free(L->inicio);
+//         if(aux==NULL){
+//             L->fim=NULL;
+//             L->inicio=NULL;
+//             L->tamanho--;
+//             return;
+//         }
+//         aux->anterior=NULL;
+//         L->inicio=aux;
+//         L->tamanho--;
+//         return;
+//     }else if(k==L->tamanho){
+//         aux=L->fim->anterior;
+//         free(L->fim);
+//         aux->proximo=NULL;
+//         L->fim=aux;
+//         L->tamanho--;
+//     }else{
+//         Node * antes,*atual;
+//         antes=L->inicio;
+//         atual=antes->proximo;
+//         while(counter+1!=k){
+//             antes=antes->proximo;
+//             atual=atual->proximo;
+//             counter++;
+//         }
+//         aux=atual->proximo;
+//         antes->proximo=aux;
+//         aux->anterior=antes;
+//         free(atual);
+//         L->tamanho--;
+//         return;
+//     }
+// }
+// int busca(double_linkedlist *L,int x){
+//     if(L==NULL){
+//         return 0;
+//     }
+//     if(L->inicio==NULL){
+//         return 0;
+//     }
+//     Node *ptr=L->inicio;
+//     while(ptr!=NULL){
+//         if(ptr->dado==x){
+//             return 1;
+//         }
+//         ptr=ptr->proximo;
+//     }
+//     return 0;
+// }
+// int tamanho(double_linkedlist *L){
+//     return L->tamanho;
+// }
+
+// typedef struct Node{
+//     int dado;
+//     struct Node * prox;
+// }Node;
+// typedef struct ring_buffer{
+//     int capacidade;
+//     int lotacao;
+//     Node *inicio;
+//     Node *fim;
+// }ring_buffer;
+// // assume-se que o inicio sao os dados mais antigos e o fim sao os mais novos;
+// void inicializar_ring_buffer(ring_buffer *ring,int capacidade){
+//     ring->capacidade=capacidade;
+//     ring->fim=NULL;
+//     ring->inicio=NULL;
+//     ring->lotacao=0;
+//     return;
+// }
+// void insercao(ring_buffer* ring,int dado){
+//     Node *novo;
+//     Node *aux;
+   
+    
+//     if(ring->inicio==NULL){
+//         novo=malloc(sizeof(Node));
+//         if(novo == NULL){
+//             return ;
+//         }
+//         novo->dado=dado;
+//         ring->inicio=novo;
+//         ring->fim=novo;
+//         novo->prox=ring->inicio;
+//         ring->lotacao++;
+//         return;
+
+//     }
+//     else if(ring->lotacao<ring->capacidade){
+//         novo=malloc(sizeof(Node));
+//         if(novo == NULL){
+//             return ;
+//         }
+//         novo->dado=dado;
+//         aux=ring->fim->prox;
+//         ring->fim->prox=novo;
+//         ring->fim=novo;
+//         novo->prox=aux;
+//         ring->lotacao++;
+//         return ;
+//     }else{
+//         ring->inicio->dado=dado;
+//         ring->fim=ring->inicio;
+//         ring->inicio=ring->inicio->prox;
+//         return;
+//     }
+// }
+// Node * recente(ring_buffer * ring){
+//     if(ring->fim==NULL){
+//         return NULL;
+        
+//     }
+//     return ring->fim;
+// }
+// Node * antigo(ring_buffer * ring){
+//     if(ring-> inicio == NULL){
+//         return NULL;
+//     }
+//     return ring->inicio;
+// }
+
+// A estrutura de dados de pilha (em inglês, stack) segue o princípio LIFO (Last In, First
+// Out), ou seja, o último elemento que entra é o primeiro a sair. Isso significa que a última
+// informação inserida na pilha é a primeira ser removida. Nesse sentido, construa essa
+// estrutura de dados dinamicamente alocada contendo as seguintes operações:
+// a) EMPILHAR(S, x): Empilha o elemento x na pilha S.
+// Nota: Garanta que o tempo de execução dessa função seja Θ(1).
+// b) DESEMPILHAR(S): Desempilha o elemento no topo da pilha S.
+// Nota: Garanta que o tempo de execução dessa função seja Θ(1).
+// c) TOPO(S): Retorne o elemento x no topo da pilha S.
+// Nota: Garanta que o tempo de execução dessa função seja Θ(1).
+// typedef struct stack{
+//     int *itens;
+//     int topo;
+//     int max;
+// }stack;
+// stack* inicializar_pilha(int max){
+//     stack *pilha=malloc(sizeof(stack));
+//     if(pilha == NULL){
+//         return NULL;
+//     }
+//     pilha->itens=malloc(sizeof(int)*max);
+//     if(pilha->itens==NULL){
+//         free(pilha);
+//         return NULL;
+//     }
+//     pilha->max=max;
+//     pilha->topo=-1;
+//     return pilha;
+// }
+// void empilhar(stack * pilha,int x){
+//     pilha->topo++;
+//     if(pilha->topo==pilha->max){
+//         pilha->topo--;
+//         return;
+//     }
+//     pilha->itens[pilha->topo]=x;
+//     return;
+// }
+// void desempilhar(stack * pilha){
+//     if(pilha->topo==-1){
+//         return;
+//     }
+//     pilha->topo--;
+//     return;
+// }
+// int* topo(stack * pilha){
+//     if(pilha->topo==-1){
+//         return NULL;
+//     }
+//     return &(pilha->itens[pilha->topo]);
+// }
+
+// Utilize a estrutura de dados do tipo pilha para implementar uma função que realizará a
+// verificação do balanceamento de parênteses. Isto é, escreva uma função que verifique se
+// todos os parênteses, colchetes e chaves de uma cadeia de caracteres S estão balanceados.
+// A função deve retornar 1 se estiver balanceadas, e 0 caso contrário.
+// typedef struct pilha{
+//     char str[256];
+//     int topo;
+// }pilha;
+
+// pilha* inicializar(){
+//     pilha * stack=malloc(sizeof(pilha));
+//     if(stack==NULL){
+//         return NULL ;
+//     }
+//     stack->topo=-1;
+//     return stack;
+// }
+// void empilhar(pilha * pilha,char c){
+//     pilha->topo++;
+//     if(pilha->topo==256){
+//         return;
+//     }
+//     pilha->str[pilha->topo]=c;
+//     return;
+// }
+// char* desempilhar(pilha *pilha){
+//     if(pilha->topo==-1){
+//         return NULL;
+//     }
+//     char *c=&(pilha->str[pilha->topo]);
+//     pilha->topo--;
+//     return c;
+// }
+// int verificar_balanceamento(char* str){
+//     pilha * aberto;
+//     char *c;
+//     int i=0;
+//     aberto=inicializar();
+
+//     while(str[i]!='\0'){
+//         if(str[i]=='(' || str[i]=='['|| str[i]=='{'){
+//             empilhar(aberto,str[i]);
+//         }else if(str[i]==')' || str[i]==']'|| str[i]=='}'){
+//             c=desempilhar(aberto);
+//             if(c == NULL){
+//                 return 0;
+//             }
+//             if(*c == '(' && str[i]!=')'){
+//                 return 0;
+//             }
+//             if(*c == '[' && str[i]!=']'){
+//                 return 0;
+//             }
+//             if(*c == '{' && str[i]!='}'){
+//                 return 0;
+//             }
+            
+//         }
+//         i++;
+//     }
+//     if(aberto->topo==-1){
+//         return 1;
+//     }else{
+//         return 0;
+//     }
+   
+// }
+
+// Implemente uma função com pilha que recebe uma cadeia de caracteres S e inverta as
+// letras de cada palavra individualmente, mantendo a ordem das palavras intacta.
+// Dica: Use uma pilha para realizar a inversão das palavras.
+// typedef struct stack{
+//     char sequencia[256];
+//     int topo;
+// }stack;
+
+// void empilhar(stack *pilha,char c){
+//     pilha->topo++;
+//     if(pilha->topo==256){
+//         pilha->topo--;
+//         return;
+//     }
+//     pilha->sequencia[pilha->topo]=c;
+//     return;
+// }
+// char desempilhar(stack *pilha){
+
+//     char c=pilha->sequencia[pilha->topo];
+//     pilha->topo--;
+//     return c;
+// }
+// void inverter_palavras(char *str){
+//     stack pilha;
+//     pilha.topo=-1;
+//     int init_inversion=0;
+//     int i=0;
+//     while(str[i+1]!='\0'){
+//         i++;
+//     }
+//     str[i+1]=' ';
+//     str[i+2]='\0';
+//     i=0;
+//     while(str[i]!='\0'){
+        
+//         if(str[i]!=' '){
+//             empilhar(&pilha,str[i]);
+//         }else{
+          
+//             i=init_inversion;
+//             while(str[i]!=' '){
+//                 str[i]=desempilhar(&pilha);
+//                 i++;
+//             }
+//             init_inversion=i+1;
+        
+//         }
+       
+//         i++;
+//     }
+   
+
+// }
+// int main(){
+//     char str[256]="Algoritmos e Tecnicas de Programacao II";
+//     inverter_palavras(str);
+//     printf("%s ",str);
+// }
+
+// Construa um programa que receba da entrada padrão do usuário uma cadeia de carac-
+// teres contendo uma expressão matemática no formato pós-fixado (em que os operadores
+// aparecem depois dos operandos). O programa deve suportar as operações de adição,
+// subtração, multiplicação e divisão.
+// typedef struct stack{
+//     char sequencia[256];
+//     int topo;
+// }stack;
+
+// stack * inicializar(){
+//     stack * pilha = malloc(sizeof(stack));
+//     pilha->topo=-1;
+//     return pilha;
+// }
+// void empilhar(stack * pilha,char c){
+//     pilha->topo++;
+//     if(pilha->topo == 256){
+//         pilha->topo--;
+//         return ;
+//     }
+//     pilha->sequencia[pilha->topo]=c;
+//     return;
+// }
+// char  desempilhar(stack * pilha){
+//     if(pilha->topo==-1){
+//         return '\0';
+
+//     }
+//     char c=pilha->sequencia[pilha->topo];
+//     pilha->topo--;
+//     return c;
+// }
+// int calcular_operacao(char operador,int n1,int n2){
+//     if(operador == '+'){
+//         return n1+n2;
+//     }
+//     if(operador=='-'){
+//         return n2-n1;
+//     }
+//     if(operador=='*'){
+//         return n1*n2;
+//     }
+//     if(operador== '/'){
+//         return n2/n1;
+//     }
+// }
+// int pos_fixado(char * str){
+//     stack * pilha=inicializar();
+//     if(pilha == NULL){
+//         return 0;
+//     }
+//     int i=0;
+//     int result=0;
+//     int n1,n2;
+//     char c1,c2;
+//     while(str[i]!='\0'){
+//         if(str[i]=='+' || str[i]=='-' || str[i]=='*'||str[i]=='/'){
+//             c2=desempilhar(pilha);
+//             c1=desempilhar(pilha);
+//             if(c1=='\0' || c2=='\0'){
+//                 printf("Formato invalido");
+//                 free(pilha);
+//                 return 0;
+//             }
+           
+//             n1=atoi(&c1);
+//             n2=atoi(&c2);
+//             if((n1==0 && c1!='0')||(n2==0 && c2!='0')){
+//                 printf("Formato invalido");
+//                 free(pilha);
+//                 return 0;
+//             }
+//             printf("nums:%d %d\n",n1,n2);
+//             result+=calcular_operacao(str[i],n1,n2);
+            
+//             empilhar(pilha,(char)result);
+
+
+
+//         }else{
+//             empilhar(pilha,str[i]);
+//         }
+//         i++;
+//     }
+// }
+// int main(){
+//     char str[256]="51+5*";
+//     printf("%d",pos_fixado(str));
+// }
+
+// Implemente uma função que reverta a ordem dos elementos em uma pilha S com as
+// seguintes estruturas de dados adicionais:
+// a) Usando duas pilhas auxiliares.
+// b) Usando uma fila auxiliar.
+// #define MAX 20
+// typedef struct stack{
+//     int topo;
+//     int itens[MAX];
+// }stack;
+// typedef struct queue{
+//     int items[MAX];
+//     int capacidade;
+//     int inicio;
+//     int fim;
+//     int tamanho;
+// }queue;
+// stack * inicializar(){
+//     stack * pilha=malloc(sizeof(stack));
+//     if(pilha!=NULL){
+//         pilha->topo=-1;
+//     }
+//     return pilha;
+// }
+// queue * inicializar_fila(){
+//     queue *fila=malloc(sizeof(queue));
+//     fila->capacidade=MAX;
+//     fila->inicio=0;
+//     fila->fim=0;
+//     fila->tamanho=0;
+//     return fila;
+// }
+
+// void enfileirar(queue * fila,int x){
+//     if(fila->tamanho==fila->capacidade){
+//         return;
+//     }
+//     fila->tamanho++;
+//     fila->items[fila->fim]=x;
+//     fila->fim=(fila->fim+1)%fila->capacidade;
+// }
+// int desenfilerar(queue * fila){
+//     if(fila->tamanho==0){
+//         return -1;
+//     }
+//     int x;
+//     fila->tamanho--;
+//     x=fila->items[fila->inicio];
+//     fila->inicio=(fila->inicio+1)%fila->capacidade;
+//     return x;
+// }
+// void empilhar(stack * pilha,int x){
+//     pilha->topo++;
+//     if(pilha->topo == MAX){
+//         pilha->topo--;
+//         return;
+//     }
+//     pilha->itens[pilha->topo]=x;
+//     return;
+// }
+// int desempilhar(stack * pilha){
+//     if(pilha->topo==-1){
+//         return -1;
+//     }
+//     int temp=pilha->itens[pilha->topo];
+//     pilha->topo--;
+//     return temp;
+// }
+// void change(stack * pilha){
+//     queue *fila=inicializar_fila();
+//     if(fila==NULL){
+//         return;
+//     }
+//     int i,temp,max=pilha->topo;
+//     for(i=0;i<=max;i++){
+//         temp=desempilhar(pilha);
+//         enfileirar(fila,temp);
+//     }
+//     for(i=0;i<=max;i++){
+//         temp=desenfilerar(fila);
+//         empilhar(pilha,temp);
+//     }
+//     free(fila);
+//     return;
+// }
+// void revert(stack* pilha){
+//     change(pilha);
+//     return;
+// }
+// void change(stack * original,stack * aux1,stack * aux2){
+//     int counter;
+//     int max=original->topo;
+//     int temp;
+//     for(counter=0;counter<=max;counter++){
+//         temp=desempilhar(original);
+//         empilhar(aux1,temp);
+//     }
+//     for(counter=0;counter<=max;counter++){
+//         temp=desempilhar(aux1);
+//         empilhar(aux2,temp);
+//     }
+//     for(counter=0;counter<=max;counter++){
+//         temp=desempilhar(aux2);
+//         empilhar(original,temp);
+//     }
+//     return ;
+// }
+// void revert(stack * pilha){
+//     stack * aux1=inicializar();
+//     if(aux1==NULL){
+//         return ;
+//     }
+//     stack * aux2=inicializar();
+//     if(aux2==NULL){
+//         free(aux1);
+//         return ;
+//     }
+//     change(pilha,aux1,aux2);
+//     free(aux1);
+//     free(aux2);
+// }
+
+
+
+
+// Implemente uma função que receba duas pilhas S1 e S2, e que transfira os elementos da
+// pilha S1 para a pilha S2 de modo que os elementos em S2 estejam na mesma ordem de S1.
+// Dica: Use uma pilha adicional.
+// #define MAX 100
+// typedef struct stack{
+//     int itens[MAX];
+//     int topo;
+// }stack;
+// stack * inicializar(){
+//     stack * pilha=malloc(sizeof(stack));
+//     if(pilha!=NULL){
+//         pilha->topo=-1;
+//     }
+//     return pilha;
+// }
+// void empilhar( stack * pilha,int dado){
+//     pilha->topo++;
+//     if(pilha->topo==MAX){
+//         pilha->topo--;
+//         return;
+//     }
+//     pilha->itens[pilha->topo]=dado;
+//     return;
+// }
+// int desempilhar(stack * pilha){
+//     if(pilha->topo == -1){
+//         return -1;
+
+//     }
+//     int x=pilha->itens[pilha->topo];
+//     pilha->topo--;
+//     return x;
+// }
+// void concat(stack * s1,stack*s2){
+//     stack * aux=inicializar();
+//     if(aux==NULL){
+//         return;
+//     }
+//     int i,temp;
+//     int topo=s1->topo;
+//     for(i=0;i<=topo;i++){
+//         temp=desempilhar(s1);
+//         empilhar(aux,temp);
+//     }
+//     for(i=0;i<=topo;i++){
+//         temp=desempilhar(aux);
+//         empilhar(s2,temp);
+//     }
+//     free(aux);
+//     return;
+// }
+
+
+// Escreva um programa com pilha que determine se uma dada cadeia de caracteres S é um
+// palíndromo. Você deve ler apenas um caractere por vez da cadeia de caracteres e não
+// deve usar um vetor para primeiro armazenar a cadeia de caracteres e depois analisar.
+// Dica: Use uma ou mais pilhas.
+
+// #define MAX 100
+// typedef struct stack{
+//     char itens[MAX];
+//     int topo;
+// }stack;
+// stack * inicializar(){
+//     stack * pilha=malloc(sizeof(stack));
+//     if(pilha!=NULL){
+//         pilha->topo=-1;
+//     }
+//     return pilha;
+// }
+// void empilhar( stack * pilha,char dado){
+//     pilha->topo++;
+//     if(pilha->topo==MAX){
+//         pilha->topo--;
+//         return;
+//     }
+//     pilha->itens[pilha->topo]=dado;
+//     return;
+// }
+// char desempilhar(stack * pilha){
+//     if(pilha->topo == -1){
+//         return -1;
+
+//     }
+//     int x=pilha->itens[pilha->topo];
+//     pilha->topo--;
+//     return x;
+// }
+// int eh_palindromo(stack * pilha){
+//     stack * aux1,*aux2;
+//     aux1=inicializar();
+//     if(aux1==NULL){
+//         return 0;
+//     }
+//     aux2=inicializar();
+//     if(aux2==NULL){
+//         free(aux1);
+//         return 0;
+//     }
+//     char temp;
+//     int tamanho=pilha->topo;
+//     int i;
+//     for(i=0;i<=tamanho;i++){
+//         temp=desempilhar(pilha);
+//         empilhar(aux1,temp);
+//         empilhar(aux2,temp);
+//     }
+//     for(i=0;i<=tamanho;i++){
+//         temp=desempilhar(aux2);
+//         empilhar(pilha,temp);
+//     }
+//     for(i=0;i<=tamanho;i++){
+//         if(desempilhar(aux1)!=desempilhar(pilha)){
+//             free(aux1);
+//             free(aux2);
+//             return 0;
+//         }
+//     }
+//     free(aux1);
+//     free(aux2);
+//     return 1;
+// }   
+// int main(){
+//     char c;
+//     stack *pilha=inicializar();
+//     if(pilha==NULL){
+//         printf("Erro de alocacao");
+//         return 1;
+//     }
+//     printf("Digite uma palavra letra por letra,quando quiser parar,digite 0:\n");
+//     do{
+//         scanf(" %c",&c);
+//         if(c!='0'){
+//             empilhar(pilha,c);
+//         }
+        
+//     }while(c!='0');
+//     if(eh_palindromo(pilha)==0){
+//         printf("Nao eh palindromo");
+//     }else{
+//         printf("eh palindromo");
+
+//     }
+//     free(pilha);
+//     return 0;
+// }
