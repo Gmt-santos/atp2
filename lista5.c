@@ -45,6 +45,25 @@ void inserir_no_inicio(Lista* lista,int dado){
     lista->tamanho++;
     return;
 }
+void inserir_no_fim(Lista * L,int x){
+    No * novo_fim;
+    No *ptr=L->fim;
+    novo_fim=malloc(sizeof(No));
+    if(novo_fim==NULL){
+        return;
+    }
+    novo_fim->dado=x;
+    novo_fim->proximo=NULL;
+    if(ptr==NULL){
+        L->inicio=novo_fim;
+        L->fim=novo_fim;
+    }else{
+        ptr->proximo=novo_fim;
+        L->fim=novo_fim;
+    }
+    L->tamanho++;
+    return;
+}
 // Sejam L = ⟨l1, l2, . . . , ln⟩ e H = ⟨h1, h2, . . . , hm⟩ duas listas simplesmente ligadas, em que li
 // e hj representam os nós das listas L e H, respectivamente. Escreva uma função que receba
 // as listas L e H e verifique se ambas possuem o mesmo conteúdo.
@@ -1737,4 +1756,967 @@ void inserir_no_inicio(Lista* lista,int dado){
 //     }
 //     free(pilha);
 //     return 0;
+// }
+
+// Implemente uma fila de prioridades utilizando a estrutura de dados fila. Uma fila de
+// prioridades é semelhante a uma fila comum, mas cada elemento x possui uma prioridade
+// p associada, e o elemento com maior prioridade é removido antes dos outros. Se dois
+// elementos tiverem a mesma prioridade, você deve garantir que eles serão removidos de
+// acordo com a ordem em que foram inseridos. Nesse sentido, sua fila de prioridades deve
+// conter no mínimo as seguintes funções:
+// a) ENFILEIRAR(Q, x, p): Adiciona o elemento x com prioridade p na fila Q.
+// b) DESENFILEIRAR(Q): Remove da fila Q o elemento x com a maior prioridade.
+// typedef struct dado{
+//     int prioridade;
+//     int num;
+// }dado;
+// typedef struct queue{
+//     int inicio;
+//     int fim;
+//     int capacidade;
+//     int tamanho;
+//     dado* itens;
+// }queue;
+// queue * inicializar(int capacidade){
+//     queue * fila=malloc(sizeof(queue));
+//     if(fila!=NULL){
+//         fila->capacidade=capacidade;
+//         fila->tamanho=0;
+//         fila->inicio=0;
+//         fila->fim=0;
+//         fila->itens=malloc(sizeof(dado)*capacidade);
+//         if(fila->itens==NULL){
+//             free(fila);
+//             return NULL;
+//         }
+//     }
+//     return fila;
+// }
+// void ordenar_por_prioridade(queue*fila){
+//     int i;
+//     int trocar=1;
+//     dado aux;
+//     while(trocar!=0){
+//         trocar=0;
+//         for(i=0;i<fila->tamanho-1;i++){
+//             if(fila->itens[(fila->inicio+i+1)%fila->capacidade].prioridade>fila->itens[(fila->inicio+i)%fila->capacidade].
+//             prioridade){
+//                 trocar=1;
+//                 aux=fila->itens[(fila->inicio+i+1)%fila->capacidade];
+//                 fila->itens[(fila->inicio+i+1)%fila->capacidade]=fila->itens[(fila->inicio+i)%fila->capacidade];
+//                 fila->itens[(fila->inicio+i)%fila->capacidade]=aux;
+//             }
+//         }
+//     }
+//     return;
+// }
+// void enfileirar(queue* fila,int num,int prioridade){
+//     if(fila->capacidade==fila->tamanho){
+//         return;
+//     }
+//     fila->itens[fila->fim].num=num;
+//     fila->itens[fila->fim].prioridade=prioridade;
+//     fila->fim=(fila->fim+1)%fila->capacidade;
+//     fila->tamanho++;
+//     ordenar_por_prioridade(fila);
+//     return;
+// }
+// void desenfileirar(queue*fila){
+//     if(fila->tamanho==0){
+//         return;
+//     }
+//     fila->inicio=(fila->inicio+1)%fila->capacidade;
+//     fila->tamanho--;
+//     return;
+// }
+
+
+// Construa uma estrutura de dados pilha S (dinamicamente alocada) usando apenas uma
+// fila de prioridade Q e uma variável adicional p em cada nó.
+// Note: A fila de prioridade Q mencionada neste exercício deve seguir as mesmas restrições
+// do exercício anterior.
+
+// Projete e analise uma estrutura de dados do tipo pilha que inclui as operações tradicionais
+// EMPILHAR(S, x) e DESEMPILHAR(S), mas também a operação MAX(S), a qual deverá
+// retornar o elemento máximo armazenado na pilha S.
+// Note: Você não deve percorrer a pilha (ou a estrutura subjacente para implementá-la)
+// para saber quem é o elemento máximo.
+// typedef struct stack{
+//     int *itens;
+//     int capacidade;
+//     int *max;
+//     int topo;
+// }stack;
+// stack * inicializar(int capacidade){
+//     stack *pilha=malloc(sizeof(stack));
+//     if(pilha!=NULL){
+//         pilha->capacidade=capacidade;
+//         pilha->itens=malloc(sizeof(int)*capacidade);
+//         if(pilha->itens==NULL){
+//             free(pilha);
+//             return NULL;
+//         }
+//         pilha->topo=-1;
+//         pilha->max=NULL;
+//     }
+//     return pilha;
+// }
+// void empilhar(stack * pilha,int dado){
+//     pilha->topo++;
+//     if(pilha->topo == pilha->capacidade){
+//         pilha->topo--;
+//         return;
+//     }
+    
+//     return;
+// }
+// void desempilhar(stack * pilha){
+//     if(pilha->topo==-1){
+//         return;
+//     }
+//     if(pilha->)
+// }
+
+// Implemente a estrutura de dados do tipo fila apenas usando estruturas de dados do tipo
+// pilha. Sua nova estrutura de dados do tipo fila deve conter no mínimo as seguintes
+// funções ENFILEIRAR(Q, x) e DESENFILEIRAR(Q). Em seguida, implemente um programa
+// que receba da entrada padrão um número natural m > 0, e em seguida uma sequência de
+// m comandos entre:
+// #include <string.h>
+// typedef struct stack{
+//     int *itens;
+//     int capacidade;
+//     int topo;
+// }stack;
+// typedef struct queue{
+//     stack *pilha;
+   
+// }queue;
+// queue * inicializar_queue(int capacidade){
+//     queue * fila=malloc(sizeof(queue));
+//     if(fila!=NULL){
+//         fila->pilha=malloc(sizeof(stack));
+//         if(fila->pilha==NULL){
+//             free(fila);
+//             return NULL;
+//         }
+//         fila->pilha->capacidade=capacidade;
+//         fila->pilha->topo=-1;
+//         fila->pilha->itens=malloc(sizeof(int)*capacidade);
+//         if(fila->pilha->itens==NULL){
+//             free(fila->pilha);
+//             free(fila);
+//             return NULL;
+//         }
+//     }
+//     return fila;
+// }
+// void enfileirar(queue * fila,int dado){
+//     fila->pilha->topo++;
+//     if(fila->pilha->topo==fila->pilha->capacidade){
+//         fila->pilha->topo--;
+//         return;
+//     }
+//     fila->pilha->itens[fila->pilha->topo]=dado;
+//     return;
+// }
+// void desenfileirar(queue * fila){
+//     if(fila->pilha->topo==-1){
+//         return;
+//     }
+//     int temp;
+//     queue * aux=inicializar_queue(fila->pilha->capacidade);
+//     if(aux==NULL){
+//         return;
+//     }
+//     while(fila->pilha->topo>=0){
+//         temp=fila->pilha->itens[fila->pilha->topo];
+//         fila->pilha->topo--;
+//         enfileirar(aux,temp);
+//     }
+//     aux->pilha->topo--;
+//     while(aux->pilha->topo>=0){
+//         temp=aux->pilha->itens[aux->pilha->topo];
+//         aux->pilha->topo--;
+//         enfileirar(fila,temp);
+//     }
+//     free(aux->pilha);
+//     free(aux);
+//     return;
+// }
+// void frente(queue * fila){
+//     if(fila->pilha->topo==-1){
+//         return;
+//     }
+//     int temp;
+//     queue * aux=inicializar_queue(fila->pilha->capacidade);
+//     if(aux==NULL){
+//         return;
+//     }
+//     while(fila->pilha->topo>=0){
+//         temp=fila->pilha->itens[fila->pilha->topo];
+//         fila->pilha->topo--;
+//         enfileirar(aux,temp);
+//     }
+//     printf("%d",aux->pilha->itens[aux->pilha->topo]);
+//     while(aux->pilha->topo>=0){
+//         temp=aux->pilha->itens[aux->pilha->topo];
+//         aux->pilha->topo--;
+//         enfileirar(fila,temp);
+//     }
+//     free(aux->pilha);
+//     free(aux);
+//     return;
+// }
+// void handle_comando(queue*fila,char * str,int *info){
+//     if(strcmp(str,"enfileirar")==0){
+//         enfileirar(fila,*info);
+//         return;
+//     }
+//     if(strcmp(str,"desenfileirar") ==0){
+//         desenfileirar(fila);
+//         return;
+
+//     }
+//     if(strcmp(str,"frente")==0){
+//         frente(fila);
+//         return;
+//     }
+
+
+// }
+// int main(){
+//     char ** comando;
+//     int * info;
+//     int i;
+//     int n;
+//     queue * fila=inicializar_queue(100);
+//     printf("Digite o numero de comandos:\n");
+//     scanf("%d",&n);
+//     comando=malloc(sizeof(char*)*n);
+//     for(i=0;i<n;i++){
+//         comando[i]=malloc(256);
+//     }
+//     info=malloc(sizeof(int)*n);
+//     for(i=0;i<n;i++){
+//         scanf(" %s",comando[i]);
+//         if(strcmp(comando[i],"enfileirar")==0){
+//             scanf("%d",&info[i]);
+//         }
+
+//     }
+//     for(i=0;i<n;i++){
+//         handle_comando(fila,comando[i],&info[i]);
+//     }
+//     free(fila->pilha);
+//     free(fila);
+//     return 0;
+// }
+// Implemente uma função que receba uma lista simplesmente ligada L, a qual armazena
+// números inteiros, e um número inteiro x, e que particione a lista de tal forma que todos os
+// nós com valores associados menores que x venham antes dos nós com valores associados
+// maiores que x.
+
+
+// void particionar(Lista *L,int x){
+//     No *ptr=L->inicio;
+//     if(ptr==NULL){
+//         return;
+//     }
+//     int maiores_index=0,menores_index=0,i;
+//     No **maiores,**menores;
+//     maiores=malloc(sizeof(No*)*L->tamanho);
+//     if(maiores==NULL){
+//         return;
+//     }
+//     menores=malloc(sizeof(No*)*L->tamanho);
+//     if(menores==NULL){
+//         free(maiores);
+//         return;
+//     }
+//     while(ptr!=NULL){
+//         if(ptr->dado<x){
+//             menores[menores_index]=ptr;
+//             menores_index++;
+//         }else{
+//             maiores[maiores_index]=ptr;
+//             maiores_index++;
+//         }
+//         ptr=ptr->proximo;
+//     }
+//     if(menores_index!=0){
+//         L->inicio=menores[0];
+//         ptr=L->inicio;
+//         for(i=1;i<menores_index;i++){
+//             ptr->proximo=menores[i];
+//             ptr=ptr->proximo;
+//         }
+
+//     }
+//     if(maiores_index!=0){
+//         if(menores_index==0){
+//             L->inicio=maiores[0];
+//             ptr=L->inicio;
+//             for(i=1;i<maiores_index;i++){
+//                 ptr->proximo=maiores[i];
+//                 ptr=ptr->proximo;
+//             }
+//         }else{
+//             for(i=0;i<maiores_index;i++){
+//                 ptr->proximo=maiores[i];
+//                 ptr=ptr->proximo;
+//             }
+//         }
+
+//     }
+//     L->fim=ptr;
+//     ptr->proximo=NULL;
+//     free(maiores);
+//     free(menores);
+//     return;
+// }
+
+// Escreva um programa que requisite ao usuário dois números naturais m e n, ambos não
+// nulos. Em seguida, requisite da entrada padrão que o usuário insira duas sequncias de
+// números de comprimentos m e n, em que a primeira sequência deverá ser inserida em
+// uma lista simplesmente ligada, denotada por L, e a segunda deverá ser um subconjunto
+// da primeira sequência. Após isso, retorne o número de componentes conectadas em L,
+// em que dois elementos x1 e x2 da lista estão conectados se, e somente se, eles aparecem
+// consecutivamente na lista.
+// int verificar_conexoes(Lista * L,int * vec_ocurr,int m,int n){
+//     if(m==1){
+//         return 0;
+//     }
+//     if(L==NULL){
+//         return 0;
+//     }
+//     if(L->inicio==NULL|| L->fim==NULL){
+//         return 0;
+//     }
+//     int verifier1,verifier2;
+//     int conections=0;
+//     int i;
+//     No *ptr1,*ptr2;
+//     ptr1=L->inicio;
+//     ptr2=ptr1->proximo;
+//     while(ptr2!=NULL){
+//         verifier1=0;
+//         verifier2=0;
+//         for(i=0;i<n;i++){
+//             if(vec_ocurr[i]==ptr1->dado){
+//                 verifier1=1;
+//             }
+//             if(vec_ocurr[i]==ptr2->dado){
+//                 verifier2=1;
+//             }
+
+//         }
+//         if(verifier1==1 && verifier2==1){
+//             conections++;
+//         }
+//         ptr1=ptr1->proximo;
+//         ptr2=ptr2->proximo;
+//     }
+//     return conections;
+
+// }
+// int main(){
+//     int m,n,i;
+//     int num;
+//     int *vec_occur;
+//     Lista *L=malloc(sizeof(Lista));
+//     L->inicio=NULL;
+//     L->fim=NULL;
+//     L->tamanho=0;
+//     printf("Digite o tamanho da sequencia:\n");
+//     scanf("%d",&m);
+//     printf("Digite o tamanho da subsequencia:\n");
+//     scanf("%d",&n);
+//     vec_occur=malloc(sizeof(int)*n);
+//     if(vec_occur==NULL){
+//         free(L);
+//         return 1;
+//     }
+//     for(i=0;i<m;i++){
+//         scanf("%d",&num);
+//         inserir_no_fim(L,num);
+//     }
+//     for(i=0;i<n;i++){
+//         scanf("%d",&num);
+//         vec_occur[i]=num;
+//     }
+//    printf("%d",verificar_conexoes(L,vec_occur,m,n));
+
+// }
+
+// Escreva um programa que receba um número natural não nulo m, e que em seguida receba
+// 2m números que serão armazenados como tuplas em uma lista simplesmente encadeada
+// L. Após isso, receba um número natural não nulo n, e em seguida receba 2n números
+// que serão armazenados também como tuplas em uma lista simplesmente encadeada H.
+// Além disso, deve-se notar que essas tuplas (elementos da lista) representam intervalos
+// fechados [a, b] e que os intervalos em uma mesma lista devem ser mutuamente disjuntos
+// (você deve checar isso). Por fim, faça com que o programa imprima na saída padrão a
+// intersecção resultante dessas duas listas de intervalos fechados, imprimindo a tupla de
+// elementos na saída padrão separadas por linha.
+
+// Exemplo de Intersecção Intervalar: A intersecção de dois intervalos fechados é um con-
+// junto de números reais que ou é vazia ou representa um intervalo fechado. Por exemplo,
+
+// a intersecção dos intervalos [1, 3] e [2, 4] é [2, 3].
+
+
+
+// Escreva um programa que requisite do usuário por meio da entrada padrão três números
+// naturais n ≥ 1, p e r, com as restrições de que p ≥ r, e p, q < n. Em seguida, requisite
+// do usuário uma sequência de n números inteiros as quais devem ser armazenadas em
+// uma lista simplesmente ligada L. Por fim, faça a troca dos elementos nas posições p e q e
+// imprima na saída padrão da aplicação os elementos da lista resultante.
+// void troca(Lista *L,int p,int r){
+//     No * ptr_inicial,*ptr_final;
+//     int position=0,aux;
+//     if(p==r){
+//         return ;
+//     }
+//     ptr_inicial=L->inicio;
+//     while(position!=r){
+//         position++;
+//         ptr_inicial=ptr_inicial->proximo;
+//     }
+//     ptr_final=ptr_inicial;
+//     while(position!=p){
+//         position++;
+//         ptr_final=ptr_final->proximo;
+//     }
+//     aux=ptr_inicial->dado;
+//     ptr_inicial->dado=ptr_final->dado;
+//     ptr_final->dado=aux;
+//     return;
+// }
+// int main(){
+//     int p,r,n;
+//     int i,num;
+//     Lista *L=malloc(sizeof(Lista));
+//     L->inicio=NULL;
+//     L->fim=NULL;
+//     L->tamanho=0;
+//     printf("Digite o numero total n do tamanho da lista encadeada:\n");
+//     scanf("%d",&n);
+//     do{
+//         printf("Digite o valor p:\n");
+//         scanf("%d",&p);
+//         if(p>=n){
+//             printf("p tem que ser menor que n\n");
+//         }
+//     }while(p>=n);
+//     do{
+//         printf("Digite o valor r:\n");
+//         scanf("%d",&r);
+//         if(r>p){
+//             printf("r tem que ser menor ou igual que p\n");
+//         }
+//     }while(r>p);
+//     for(i=0;i<n;i++){
+//         scanf("%d",&num);
+//         inserir_no_fim(L,num);
+//     }
+//     percorrer_lista(L);
+//     troca(L,p,r);
+//     percorrer_lista(L);
+//     //libera Nos de L
+//     free(L);
+    
+//     return 0;
+// }
+
+
+// Projete uma estrutura de dados do tipo pilha, a qual armazenará números inteiros, que
+// permita empilhar, desempilhar, acessar o elemento do topo, e permitir recuperar o menor
+// elemento em tempo de execução Θ(1). Em seguida, projete um programa que requisite
+// ao usuário um número natural m > 0, e uma sequência de m comandos entre:
+// a) EMPILHAR x: Esse comando empilhará o elemento x na pilha.
+// b) DESEMPILHAR: Esse comando desempilhará um elemento da pilha.
+// c) TOPO: Esse comando imprimirá na saída padrão da aplicação o elemento no topo da pilha.
+// d) MIN: Esse comando imprimirá na saída padrão da aplicação o menor elemento da pilha.
+// #include <string.h>
+// typedef struct stack{
+//     int *itens;
+//     int menor;
+//     int topo;
+//     int tamanho;
+// }stack;
+// stack * init(int tamanho){
+//     if(tamanho ==0){
+//         return NULL;
+//     }
+//     stack * pilha=malloc(sizeof(stack));
+//     if(pilha !=NULL){
+//         pilha->itens=malloc(sizeof(int)*tamanho);
+//         if(pilha->itens==NULL){
+//             free(pilha);
+//             return NULL;
+//         }
+//         pilha->topo=-1;
+//         pilha->tamanho=tamanho;
+//     }
+//     return pilha;
+// }
+// void empilhar(stack * pilha,int dado){
+//     if(pilha==NULL){
+//         return;
+//     }
+//     if(pilha->itens==NULL){
+//         return;
+//     }
+//     pilha->topo++;
+//     if(pilha->tamanho==pilha->topo){
+//         pilha->topo--;
+//         return;
+//     }
+//     pilha->itens[pilha->topo]=dado;
+//     if(pilha->topo==0){
+//         pilha->menor=dado;
+//     }else if(pilha->menor>dado){
+//         pilha->menor=dado;
+//     }
+//     return;
+// }
+// void desempilhar(stack * pilha){
+//     if(pilha==NULL){
+//         return;
+//     }
+//     if(pilha->itens==NULL){
+//         return;
+//     }
+//     if(pilha->topo==-1){
+//         return;
+//     }
+//     if(pilha->itens[pilha->topo]==pilha->menor){
+//         int i;
+//         pilha->topo--;
+//         //nem entra se a pilha tiver sido esvaziada(pilha->topo=-1),"menor" fica com lixo,mas isso será tratado dps
+//         if(pilha->topo>=0){
+//             pilha->menor=pilha->itens[0];
+//         }
+//         for(i=0;i<=pilha->topo;i++){
+//             if(pilha->itens[i]<menor){
+//                 pilha->menor=pilha->itens[i];
+        
+//             }
+//         }
+//         return;
+//     }
+//     pilha->topo--;
+//     return;
+// }
+// void topo(stack * pilha){
+//     if(pilha==NULL){
+//         return;
+//     }
+//     if(pilha->itens==NULL){
+//         return;
+//     }
+//     if(pilha->topo==-1){
+//         return;
+//     }
+//     printf("%d\n",pilha->itens[pilha->topo]);
+//     return;
+// }
+// void min(stack * pilha){
+//     if(pilha==NULL){
+//         return;
+//     }
+//     if(pilha->itens==NULL){
+//         return;
+//     }
+//     if(pilha->topo==-1){
+//         return;
+//     }
+//     printf("%d\n",pilha->menor);
+//     return;
+// }
+// void handle_comando(stack *pilha,char * str,int *dado){
+//     if(strcmp(str,"empilhar")==0){
+//         empilhar(pilha,*dado);
+//         return;
+//     }
+//     if(strcmp(str,"desempilhar")==0){
+//         desempilhar(pilha);
+//         return;
+//     }
+//     if(strcmp(str,"topo")==0){
+//         topo(pilha);
+//         return ;
+//     }
+//     if(strcmp(str,"min")==0){
+//         min(pilha);
+//         return;
+//     }
+
+// }
+// int main(){
+//     stack * pilha=init(100);
+//     if(pilha==NULL){
+//         printf("Erro de alocacao!");
+//         return 1;
+//     }
+//     int i,j;
+//     int comando;
+//     char **comando_strings;
+//     int *comando_numeros;
+//     printf("Digite a quantidade de comandos:\n");
+//     scanf("%d",&comando);
+//     comando_numeros=malloc(sizeof(int)*comando);
+//     if(comando_numeros==NULL){
+//         free(pilha);
+//         printf("Erro de alocacao!");
+//         return 1;
+//     }
+//     comando_strings=malloc(sizeof(char *)*comando);
+//     if(comando_strings==NULL){
+//         free(pilha);
+//         free(comando_numeros);
+//         printf("Erro de alocacao!");
+//         return 1;
+//     }
+//     for(i=0;i<comando;i++){
+//         comando_strings[i]=malloc(256);
+//         if(comando_strings[i]==NULL){
+//             for(j=0;j<i;j++){
+//                 free(comando_strings[j]);
+//             }
+//             free(comando_strings);
+//             free(pilha);
+//             free(comando_numeros);
+//             printf("Erro de alocacao!");
+//             return 1;
+//         }
+//     }
+
+//     for(i=0;i<comando;i++){
+//         scanf(" %s",comando_strings[i]);
+//         if(strcmp(comando_strings,"empilhar")==0){
+//             scanf("%d",&comando_numeros[i]);
+//         }
+//     }
+//     for(i=0;i<comando;i++){
+//         handle_comando(pilha,comando_strings[i],&comando_numeros[i]);
+//     }
+//     return 0;
+// }
+
+
+
+// Construa um programa que leia um número n e, em seguida, n números inteiros, inserindo-
+// os no final de uma lista duplamente encadeada. Após a leitura, imprima os elementos da
+// lista do início para o fim e, em seguida, do fim para o início. Libere todos os nós ao final.
+// typedef struct Node{
+//     struct Node * ant;
+//     struct Node * prox;
+//     int dado;
+// }Node;
+// typedef struct duplamente{
+//     Node * inicio;
+//     Node * fim;
+//     int tamanho;
+// }duplamente;
+
+// duplamente * init(){
+//     duplamente * lista=malloc(sizeof(duplamente));
+//     if(lista != NULL){
+//         lista->inicio=NULL;
+//         lista->fim=NULL;
+//         lista->tamanho=0;
+//     }
+//     return lista;
+// }
+// void inserir_no_final(duplamente * L ,int dado){
+//     Node * novo=malloc(sizeof(Node));
+//     Node * ptr;
+//     if(novo == NULL){
+//         return;
+//     }
+//     novo->dado=dado;
+//     if(L->inicio==NULL){
+        
+//         novo->ant=NULL;
+//         novo->prox=NULL;
+//         L->inicio=novo;
+//         L->fim=novo;
+//         L->tamanho++;
+//         return;
+//     }
+//     ptr=L->inicio;
+//     while(ptr->prox!=NULL){
+//         ptr=ptr->prox;
+//     }
+//     novo->ant=ptr;
+//     novo->prox=NULL;
+//     ptr->prox=novo;
+//     L->fim=novo;
+//     L->tamanho++;
+//     return;
+// }
+
+// void percorrer_reta(duplamente *L){
+//     if(L==NULL){
+//         return;
+//     }
+//     if(L->inicio==NULL){
+//         return;
+//     }
+//     Node * ptr=L->inicio;
+//     while(ptr!=NULL){
+//         printf("%d ",ptr->dado);
+//         ptr=ptr->prox;
+//     }
+//     return;
+// }
+// void percorrer_re(duplamente *L){
+//     if(L==NULL){
+//         return;
+//     }
+//     if(L->fim==NULL){
+//         return;
+//     }
+//     Node * ptr=L->fim;
+//     while(ptr!=NULL){
+//         printf("%d ",ptr->dado);
+//         ptr=ptr->ant;
+//     }
+//     return;
+// }
+// void liberar_lista(duplamente *L){
+//     if(L==NULL){
+//         return;
+//     }
+//     if(L->inicio==NULL){
+//         free(L);
+//         return;
+//     }
+//     Node *ptr,*aux;
+//     ptr=L->inicio;
+//     while(ptr!=NULL){
+//         aux=ptr;
+//         ptr=ptr->prox;
+//         free(aux);
+//     }
+//     free(L);
+//     return;
+// }
+// int main(){
+//     duplamente * L=init();
+//     if(L==NULL){
+//         printf("Erro de alocacao!");
+//         return 1;
+//     }
+//     int qtde;
+//     int num;
+//     int i;
+//     printf("Digite o tamanho da lista encadeada:\n");
+//     scanf("%d",&qtde);
+//     for(i=0;i<qtde;i++){
+//         scanf("%d",&num);
+//         inserir_no_final(L,num);
+//     }
+//     percorrer_reta(L);
+//     printf("\n");
+//     percorrer_re(L);
+//     liberar_lista(L);
+//     return 0;
+// }
+
+// No problema de Josephus, n pessoas, numeradas de 1 a n, estão dispostas em um círculo.
+// Começando pela pessoa 1, conta-se k pessoas no sentido horário e a k-ésima pessoa é
+// eliminada. A contagem recomeça a partir da pessoa seguinte à eliminada, até que reste
+// apenas uma pessoa. Utilizando uma lista circular simplesmente encadeada, escreva um
+// programa que leia n e k e imprima a ordem de eliminação e o sobrevivente.
+// typedef struct lista_circular{
+//     No * inicio;
+//     No * fim;
+//     int tamanho;
+// }lista_circular;
+
+// lista_circular * init(){
+//     lista_circular* lista=malloc(sizeof(lista_circular));
+//     if(lista!=NULL){
+//         lista->inicio=NULL;
+//         lista->fim=NULL;
+//         lista->tamanho=0;
+//     }
+//     return lista;
+// }
+// void constroi(lista_circular* L,int n){
+//     No * aux,*ptr;
+//     int count=1;
+//     L->tamanho=n;
+//     while(count<=n){
+           
+//         aux=malloc(sizeof(No));
+          
+//         aux->dado=count;
+         
+//         if(L->inicio==NULL){
+             
+//             L->inicio=aux;
+//             L->fim=aux;
+//             ptr=aux;
+//             aux->proximo=NULL;
+            
+//         }
+//         else if(count==n){
+            
+//            ptr->proximo=aux;
+//            aux->proximo=L->inicio;
+//            L->fim=aux;
+//         }else{
+              
+//             ptr->proximo=aux;
+//             aux->proximo=NULL;
+//             L->fim=aux;
+//             ptr=ptr->proximo;            
+//         }
+//         count++;
+//     }
+//     return;
+// }
+// int josephus(lista_circular* L,int * eliminados,int k){
+ 
+//     if(L->inicio==NULL){
+//         return 0;
+//     }
+//     if(L->inicio==L->fim){
+//         return L->inicio->dado;
+//     }
+//     No * anterior,*atual,*aux;
+//     int eliminados_index=0;
+//     int count=1;
+//     anterior=L->fim;
+//     atual=L->inicio;
+//     while(L->tamanho!=1){
+       
+//         if(count==k){
+//             aux=atual->proximo;
+//             anterior->proximo=aux;
+//             eliminados[eliminados_index]=atual->dado;
+//             eliminados_index++;
+//             free(atual);
+//             atual=aux;
+//             count=1;
+//             L->tamanho--;
+            
+//         }else{
+//             count++;
+//             anterior=anterior->proximo;
+//             atual=atual->proximo;
+
+//         }
+
+//     }
+//     return atual->dado;
+// }
+// int main(){
+//     int n,k;
+//     int i;
+//     int * eliminados;
+//     int vencedor;
+//     lista_circular * L=init();
+//     if(L==NULL){
+//         printf("Erro de alocacao!!!");
+//         return 1;
+//     }
+//     printf("Digite o numero de pessoas:\n");
+//     scanf("%d",&n);
+//     printf("Digite o passo de avanco:\n");
+//     scanf("%d",&k);
+//     constroi(L,n);
+//     eliminados=malloc(sizeof(int)*(n-1));
+//     if(eliminados==NULL){
+//         free(L);
+//         printf("Erro de alocacao!!!");
+//         return 1;
+//     }
+//     vencedor=josephus(L,eliminados,k);
+//     printf("Eliminados: ");
+//     for(i=0;i<n-1;i++){
+//         printf("%d ",eliminados[i]);
+//     }
+    
+//     printf("\nSobrevivente:%d",vencedor);
+   
+// }
+
+// Utilizando uma fila (dinamicamente alocada) de cadeias de caracteres, escreva um pro-
+// grama que leia um número natural n e imprima as representações binárias dos números
+// de 1 a n. A ideia é iniciar a fila com "1" e, a cada passo, remover o elemento da frente,
+// imprimi-lo, e inserir no final da fila esse elemento concatenado com "0" e com "1", nessa
+// ordem.
+// #include <string.h>
+// #define natural_size 8
+// typedef struct queue{
+//     char ** bins;
+//     int inicio;
+//     int fim;
+//     int n;
+// }queue;
+// queue * init(int n){
+//     queue * fila=malloc(sizeof(queue));
+//     if(fila!=NULL){
+//         fila->bins=malloc(sizeof(char*)*n);
+//         fila->fim=0;
+//         fila->inicio=0;
+//         fila->n=n;
+//         if(fila->bins!=NULL){
+//             int i,j;
+//             for(i=0;i<n;i++){
+//                 fila->bins[i]=malloc(natural_size+1);
+//                 if(fila->bins[i]==NULL){
+//                     for(j=0;j<i;j++){
+//                         free(fila->bins[j]);
+//                     }
+//                     free(fila->bins);
+//                     free(fila);
+//                     return NULL;
+//                 }
+//             }
+//         }else{
+//             free(fila);
+//             return NULL;
+//         }
+//     }
+//     return fila;
+// }
+// void binaries(int n){
+//     queue * L=init(n);
+//     char dummy[natural_size+1];
+//     int i;
+//     if(L==NULL){
+//         return;
+//     }
+    
+//     strcpy(L->bins[L->inicio],"1");
+   
+//     for(i=0;L->fim<n;i++){
+//         L->fim++;
+//         strcpy(dummy,L->bins[i]);
+       
+//         if(L->fim>=n){
+//             break;
+//         }
+//         strcpy(L->bins[L->fim],strcat(dummy,"0"));
+//         L->fim++;
+//         if(L->fim>=n){
+//             break;
+//         }
+//         strcpy(dummy,L->bins[i]);
+//         strcpy(L->bins[L->fim],strcat(dummy,"1"));
+//     }
+//     for(i=0;i<n;i++){
+//         printf(" %s\n",L->bins[i]);
+//     }
+//     return;
+// }
+// int main(){
+//     int n;
+//     scanf("%d",&n);
+//     binaries(n);
 // }
