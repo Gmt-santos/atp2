@@ -357,30 +357,122 @@
 // retorna o número de ocorrências. Além disso, conte e imprima o número total de com-
 // parações entre caracteres realizadas e compare-o com o número de comparações realizadas
 // pelo algoritmo KMP para a mesma entrada.
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
-int forca_bruta(const char *T, const char *P, int pos[]);
-int main(){
-    return 0;
-}
-int forca_bruta(const char *T, const char *P, int pos[]){
-    int counter=0,i,j,flag;
-    int pattern_size,text_size;
-    int * aux;
-    pattern_size=strlen(P);
-    text_size=strlen(T);
-    for(i=0;(text_size-i)>=(pattern_size);i++){
-        flag=0;
-        for(j=0;j<pattern_size;j++){
-            if(T[i+j]!=P[j]){
-                flag=1;
-                break;
-            }
+// #include <stdio.h>
+// #include <string.h>
+// #include <stdlib.h>
+// int forca_bruta(const char *T, const char *P, int * pos);
+// int * calc_lps(char *pattern);
+// int kmp(const char *T,const char *P,int *pos,int * lps);
+// int main(){
+//     char str[256]="blaaamamkakkkqqkaaaaabbbccc";
+//     char pattern[256]="aaaaa";
+//     int pos[200];
+//     int pos_size,i;
+//     int *lps;
+//     pos_size=forca_bruta(str,pattern,pos);
+//     printf("Posicoes de ocorrencia forca bruta:\n");
+//     for(i=0;i<pos_size;i++){
+//         printf("%d ",pos[i]);
+//     }
 
-        }
-        if(flag==0){
-            // realloc,aux,etc
-        }
-    }
-}
+//     lps=calc_lps(pattern);
+//     pos_size=kmp(str,pattern,pos,lps);
+//     printf("Posicoes de ocorrencia kmp:\n");
+//     for(i=0;i<pos_size;i++){
+//         printf("%d ",pos[i]);
+//     }
+//     return 0;
+// }
+// int forca_bruta(const char *T, const char *P, int *pos){
+//     int counter=0,i,j,flag;
+//     int operations=0;
+//     int pattern_size,text_size;
+//     int * aux=NULL;
+//     pattern_size=strlen(P);
+//     text_size=strlen(T);
+//     for(i=0;(text_size-i)>=(pattern_size);i++){
+//         flag=0;
+//         for(j=0;j<pattern_size;j++){
+//             operations++;
+//             if(T[i+j]!=P[j]){
+//                 flag=1;
+//                 break;
+//             }
+           
+//         }
+//         if(flag==0){
+//             pos[counter]=i;
+//             counter++;
+           
+//             // realloc,aux,etc
+//         }
+
+//     }
+//     printf("\nOperacoes forca bruta: %d\n",operations);
+//     return counter;
+// }
+
+// int * calc_lps(char * pattern){
+//     if(pattern==NULL){
+//         return NULL;
+//     }
+//     int pattern_size,i=1,len=0,operations=0;
+//     int *lps;
+//     pattern_size=strlen(pattern);
+//     lps=malloc(sizeof(int)*pattern_size);
+//     if(lps==NULL){
+//         return NULL;
+//     }
+//     lps[0]=0;
+//     while(i<pattern_size){
+//         if(pattern[i]==pattern[len]){
+//             operations++;
+//             len++;
+//             lps[i]=len;
+//             i++;
+//         }else if(len!=0){
+//             operations+=2;
+//             len=lps[len-1];
+//         }else{
+//             operations+=2;
+//             lps[i]=0;
+//             i++;
+//         }
+//     }
+//     printf("\n Operacoes realizadas no lps: %d\n",operations);
+//     return lps;
+// }
+
+// int kmp(const char *T,const char *P,int *pos,int *lps){
+//     int operations=0;
+//     int i=0,j=0;
+//     int T_size=strlen(T),P_size=strlen(P);
+//     int pos_size=0;//return
+//     while( (T_size-i)>=(P_size-j)){
+//          operations++;
+//         if(T[i]==P[j]){
+//             i++;
+//             j++;
+           
+//         }
+//         if(j==P_size){
+            
+//             pos[pos_size]=i-j;
+//             pos_size++;
+//             j=lps[j-1];
+//         }else{
+//              operations++;
+//             if(i<=T_size && T[i]!=P[j]){
+              
+//                 if(j!=0){
+                    
+//                     j=lps[j-1];
+//                 }else{
+//                     i++;
+//                 }
+//             }
+//         }
+//     }
+//     printf("\nOperacoes realizadas no kmp: %d\n",operations);
+//     return pos_size;
+// }
